@@ -20,6 +20,11 @@ MANIFEST = ROOT / "clips.json"
 SITE = ROOT / "_site"
 AUDIO_TYPES = {".mp3": "audio/mpeg", ".ogg": "audio/ogg", ".opus": "audio/ogg", ".m4a": "audio/mp4"}
 MAX_CLIP_BYTES = 2 * 1024 * 1024
+# Only this site's own files load, never scripts, and any http:// request is upgraded to https://.
+CONTENT_SECURITY_POLICY = (
+    "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; "
+    "upgrade-insecure-requests"
+)
 
 
 class VoiceEntry(TypedDict):
@@ -122,6 +127,8 @@ def render(manifest: Manifest, root: Path = ROOT) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="{CONTENT_SECURITY_POLICY}">
+  <meta name="referrer" content="no-referrer">
   <title>{title}</title>
   <link rel="stylesheet" href="style.css">
 </head>

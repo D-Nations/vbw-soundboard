@@ -4,7 +4,9 @@ A soundboard of **AI-generated** voice clips imitating the hosts of the
 [Very Bad Wizards](https://verybadwizards.com) podcast. Every clip was made with voice conversion
 models. None of them were spoken by the people they sound like.
 
-The site is plain HTML and CSS with the browser's built-in audio players, so it needs no JavaScript.
+The site is plain HTML and CSS with the browser's built-in audio players, so it needs no JavaScript. It's served
+over HTTPS, and its Content Security Policy only lets it load its own files, blocks scripts, and upgrades any
+`http://` request to `https://`.
 
 ## Voices
 

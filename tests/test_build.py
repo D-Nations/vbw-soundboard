@@ -54,6 +54,14 @@ class BuildTest(unittest.TestCase):
         self.assertIn("AI-generated", page)
         self.assertNotIn("<script", page)
 
+    def test_the_page_only_loads_its_own_files_over_https(self) -> None:
+        page = render(manifest(), self.root)
+
+        self.assertIn("script-src 'none'", page)
+        self.assertIn("default-src 'self'", page)
+        self.assertIn("upgrade-insecure-requests", page)
+        self.assertNotIn("http://", page)
+
     def test_an_empty_board_says_so(self) -> None:
         self.assertIn("No clips yet.", render(manifest(), self.root))
 
