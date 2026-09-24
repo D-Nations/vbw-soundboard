@@ -21,8 +21,9 @@ over HTTPS, and its Content Security Policy only lets it load its own files, blo
 - `clips.json` lists each voice and clip: an `id`, the `label` shown on the page, its `voice`, and its `file`.
 - `build.py` checks the manifest (every file exists, is an audio file under `clips/`, and is under 2 MB) and
   writes the site to `_site/`. It uses only the Python standard library.
-- `.github/workflows/pages.yml` runs the tests and the build on every push and pull request, and deploys to
-  GitHub Pages from `main`.
+- `.github/workflows/pages.yml` runs the tests and the build on every push and pull request. On `main` it pushes
+  the built site to the `gh-pages` branch, which GitHub Pages publishes. Every step is a shell command, using
+  `git` and [uv](https://docs.astral.sh/uv/), so nothing in the project runs on Node.
 
 Clips are produced and exported by the [voice_swapper](https://github.com/D-Nations/voice_swapper) project,
 which includes this repository as a submodule.
