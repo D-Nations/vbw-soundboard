@@ -1,0 +1,16 @@
+{
+  "title": "Very Bad Wizards Soundboard",
+  "voices": [
+    {
+      "id": "dap9000",
+      "label": "DAP-9000",
+      "description": "A synthetic imitation of Dave Pizarro's voice."
+    },
+    {
+      "id": "tamlerator",
+      "label": "Tamlerator",
+      "description": "A synthetic imitation of Tamler Sommers's voice."
+    }
+  ],
+  "clips": []
+}

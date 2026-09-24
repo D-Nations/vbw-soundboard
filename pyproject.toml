@@ -1,0 +1,17 @@
+[project]
+name = "vbw-soundboard"
+version = "0.1.0"
+description = "A static soundboard of AI-generated Very Bad Wizards voice clips"
+requires-python = ">=3.14"
+dependencies = []
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# Require types on every parameter and return value, tests included.
+extend-select = ["ANN"]
+
+[tool.pyright]
+extraPaths = ["."]
+exclude = ["_site"]
