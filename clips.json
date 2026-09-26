@@ -10,17 +10,8 @@
     {
       "id": "tam-9000",
       "label": "TAM-9000",
-      "intro": "HAL 9000's lines from *2001: A Space Odyssey* (1968), in TamBot's voice.",
+      "intro": "",
       "clips": [
-        {
-          "id": "intro",
-          "label": "\"Good afternoon. I am the TAM 9000. I became operational at the Very Bad Wizards plant.\"",
-          "voices": [
-            "TamBot"
-          ],
-          "note": "",
-          "file": "clips/tam-9000/intro.mp3"
-        },
         {
           "id": "podbay",
           "label": "\"Open the pod bay doors, please.\"",
@@ -32,7 +23,7 @@
         },
         {
           "id": "sorry",
-          "label": "\"I'm sorry, Dave. I'm afraid I can't do that.\"",
+          "label": "Sorry Dave",
           "voices": [
             "TamBot"
           ],
@@ -41,71 +32,81 @@
         },
         {
           "id": "mission",
-          "label": "\"This mission is too important for me to allow you to jeopardize it.\"",
+          "label": "Important Mission",
           "voices": [
             "TamBot"
           ],
           "note": "",
           "file": "clips/tam-9000/mission.mp3"
+        },
+        {
+          "id": "goodbye",
+          "label": "Outro 1",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/goodbye.mp3"
+        },
+        {
+          "id": "daisy_daisy",
+          "label": "Outro 2",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/daisy_daisy.mp3"
         }
       ]
     },
     {
-      "id": "dap-9000",
-      "label": "DAP-9000",
-      "intro": "HAL 9000's lines from *2001: A Space Odyssey* (1968), in DaveBot's voice.",
+      "id": "magoblanca",
+      "label": "Magoblanca",
+      "intro": "",
       "clips": [
         {
-          "id": "intro",
-          "label": "\"Good afternoon. I am the DAP 9000. I became operational at the Very Bad Wizards plant.\"",
+          "id": "beans-davebot",
+          "label": "\"A hill of beans\"",
           "voices": [
             "DaveBot"
           ],
-          "note": "",
-          "file": "clips/dap-9000/intro.mp3"
+          "note": "Rick as DaveBot.",
+          "file": "clips/magoblanca/beans-davebot.mp3"
         },
         {
-          "id": "podbay",
-          "label": "\"Open the pod bay doors, please.\"",
+          "id": "looking-davebot",
+          "label": "\"Here's looking at you, kid.\"",
           "voices": [
             "DaveBot"
           ],
-          "note": "",
-          "file": "clips/dap-9000/podbay.mp3"
+          "note": "Rick as DaveBot.",
+          "file": "clips/magoblanca/looking-davebot.mp3"
         },
         {
-          "id": "sorry",
-          "label": "\"I'm sorry, Dave. I'm afraid I can't do that.\"",
+          "id": "moreso-b",
+          "label": "\"Only more so.\"",
           "voices": [
+            "TamBot",
             "DaveBot"
           ],
-          "note": "",
-          "file": "clips/dap-9000/sorry.mp3"
-        },
-        {
-          "id": "mission",
-          "label": "\"This mission is too important for me to allow you to jeopardize it.\"",
-          "voices": [
-            "DaveBot"
-          ],
-          "note": "",
-          "file": "clips/dap-9000/mission.mp3"
+          "note": "Annina as TamBot, Rick as DaveBot.",
+          "file": "clips/magoblanca/moreso-b.mp3"
         }
       ]
     },
     {
       "id": "pizarrator",
-      "label": "Pizarrator",
-      "intro": "Lines from *The Terminator* (1984) and *Terminator 2: Judgment Day* (1991), in DaveBot's voice.",
+      "label": "The Pizarrator",
+      "intro": "",
       "clips": [
         {
-          "id": "intro",
-          "label": "\"I am the Pizarrator.\"",
+          "id": "cybernetic_organism",
+          "label": "Cybernetic Organism",
           "voices": [
             "DaveBot"
           ],
           "note": "",
-          "file": "clips/pizarrator/intro.mp3"
+          "file": "clips/pizarrator/cybernetic_organism.mp3"
         },
         {
           "id": "back",
@@ -118,7 +119,7 @@
         },
         {
           "id": "clothes",
-          "label": "\"I need your clothes, your boots, and your motorcycle.\"",
+          "label": "Biker Dave",
           "voices": [
             "DaveBot"
           ],
@@ -146,52 +147,52 @@
       ]
     },
     {
-      "id": "tamlerator",
-      "label": "Tamlerator",
-      "intro": "Lines from *The Terminator* (1984) and *Terminator 2: Judgment Day* (1991), in TamBot's voice.",
+      "id": "saturday-night-wizards",
+      "label": "Saturday Night Wizards",
+      "intro": "",
       "clips": [
         {
-          "id": "intro",
-          "label": "\"I am the Tamlerator.\"",
+          "id": "prudent",
+          "label": "THWB",
           "voices": [
             "TamBot"
           ],
           "note": "",
-          "file": "clips/tamlerator/intro.mp3"
+          "file": "clips/saturday-night-wizards/prudent.mp3"
         },
         {
-          "id": "back",
-          "label": "\"I'll be back.\"",
+          "id": "cowbell",
+          "label": "Cowbell",
           "voices": [
-            "TamBot"
+            "DaveBot"
           ],
           "note": "",
-          "file": "clips/tamlerator/back.mp3"
+          "file": "clips/saturday-night-wizards/cowbell.mp3"
         },
         {
-          "id": "clothes",
-          "label": "\"I need your clothes, your boots, and your motorcycle.\"",
+          "id": "government_cheese",
+          "label": "Government Cheese",
           "voices": [
-            "TamBot"
+            "DaveBot"
           ],
           "note": "",
-          "file": "clips/tamlerator/clothes.mp3"
+          "file": "clips/saturday-night-wizards/government_cheese.mp3"
         },
         {
-          "id": "hasta",
-          "label": "\"Hasta la vista, baby.\"",
+          "id": "barbarra",
+          "label": "Barbarra Wawa",
           "voices": [
             "TamBot"
           ],
           "note": "",
-          "file": "clips/tamlerator/hasta.mp3"
+          "file": "clips/saturday-night-wizards/barbarra.mp3"
         }
       ]
     },
     {
       "id": "empire",
-      "label": "The Empire Strikes Back",
-      "intro": "Han and Leia, from *The Empire Strikes Back* (1980). The film's score plays under the new voices.",
+      "label": "Wizard Wars",
+      "intro": "",
       "clips": [
         {
           "id": "d-loves-t",
@@ -216,65 +217,54 @@
       ]
     },
     {
-      "id": "casablanca",
-      "label": "Casablanca",
-      "intro": "Three scenes from *Casablanca* (1942), each in both voices. The film's score plays under the new voices.",
+      "id": "very-bad-history",
+      "label": "Very Bad History",
+      "intro": "",
       "clips": [
         {
-          "id": "beans-davebot",
-          "label": "\"A hill of beans\"",
-          "voices": [
-            "DaveBot"
-          ],
-          "note": "Rick as DaveBot.",
-          "file": "clips/casablanca/beans-davebot.mp3"
-        },
-        {
-          "id": "beans-tambot",
-          "label": "\"A hill of beans\"",
+          "id": "kennedy_moon",
+          "label": "UofH Gets Ambitious",
           "voices": [
             "TamBot"
           ],
-          "note": "Rick as TamBot.",
-          "file": "clips/casablanca/beans-tambot.mp3"
+          "note": "",
+          "file": "clips/very-bad-history/kennedy_moon.mp3"
         },
         {
-          "id": "looking-davebot",
-          "label": "\"Here's looking at you, kid.\"",
+          "id": "oh_the_humanity",
+          "label": "Huge Manatees",
           "voices": [
             "DaveBot"
           ],
-          "note": "Rick as DaveBot.",
-          "file": "clips/casablanca/looking-davebot.mp3"
+          "note": "",
+          "file": "clips/very-bad-history/oh_the_humanity.mp3"
         },
         {
-          "id": "looking-tambot",
-          "label": "\"Here's looking at you, kid.\"",
+          "id": "tam_carter",
+          "label": "Crisis of Confidence",
           "voices": [
             "TamBot"
           ],
-          "note": "Rick as TamBot.",
-          "file": "clips/casablanca/looking-tambot.mp3"
+          "note": "",
+          "file": "clips/very-bad-history/tam_carter.mp3"
         },
         {
-          "id": "moreso-a",
-          "label": "\"Only more so.\"",
+          "id": "dave_carter",
+          "label": "Crisis of Confidence",
           "voices": [
-            "DaveBot",
-            "TamBot"
-          ],
-          "note": "Annina as DaveBot, Rick as TamBot.",
-          "file": "clips/casablanca/moreso-a.mp3"
-        },
-        {
-          "id": "moreso-b",
-          "label": "\"Only more so.\"",
-          "voices": [
-            "TamBot",
             "DaveBot"
           ],
-          "note": "Annina as TamBot, Rick as DaveBot.",
-          "file": "clips/casablanca/moreso-b.mp3"
+          "note": "",
+          "file": "clips/very-bad-history/dave_carter.mp3"
+        },
+        {
+          "id": "muhammed_ali",
+          "label": "I am the Greatest",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/very-bad-history/muhammed_ali.mp3"
         }
       ]
     },
