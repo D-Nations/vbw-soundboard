@@ -1,0 +1,25 @@
+/* Written by build.py for the quiz's pages. */
+#quiz-page-1:checked ~ .groups > #quiz-group-1,
+#quiz-page-2:checked ~ .groups > #quiz-group-2,
+#quiz-page-3:checked ~ .groups > #quiz-group-3,
+#quiz-page-4:checked ~ .groups > #quiz-group-4,
+#quiz-page-5:checked ~ .groups > #quiz-group-5,
+#quiz-page-6:checked ~ .groups > #quiz-group-6,
+#quiz-page-7:checked ~ .groups > #quiz-group-7,
+#quiz-page-8:checked ~ .groups > #quiz-group-8,
+#quiz-page-9:checked ~ .groups > #quiz-group-9,
+#quiz-page-10:checked ~ .groups > #quiz-group-10,
+#quiz-page-11:checked ~ .groups > #quiz-group-11,
+#quiz-page-12:checked ~ .groups > #quiz-group-12,
+#quiz-page-13:checked ~ .groups > #quiz-group-13,
+#quiz-page-14:checked ~ .groups > #quiz-group-14,
+#quiz-page-15:checked ~ .groups > #quiz-group-15,
+#quiz-page-16:checked ~ .groups > #quiz-group-16,
+#quiz-page-17:checked ~ .groups > #quiz-group-17,
+#quiz-page-18:checked ~ .groups > #quiz-group-18,
+#quiz-page-19:checked ~ .groups > #quiz-group-19,
+#quiz-page-20:checked ~ .groups > #quiz-group-20 {
+  height: auto;
+  overflow: visible;
+  visibility: visible;
+}

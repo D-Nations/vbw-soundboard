@@ -1,0 +1,416 @@
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --fg: #1c1917;
+  --muted: #57534e;
+  --line: #e7e5e4;
+  --accent: #b45309;
+  --good: #15803d;
+  --bad: #b91c1c;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1917;
+    --surface: #292524;
+    --fg: #f5f5f4;
+    --muted: #a8a29e;
+    --line: #44403c;
+    --accent: #fbbf24;
+    --good: #4ade80;
+    --bad: #f87171;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 24px 16px 48px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.5 system-ui, sans-serif;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+h2 {
+  margin: 32px 0 4px;
+  font-size: 20px;
+  color: var(--accent);
+}
+
+.notice {
+  margin: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a {
+  color: var(--accent);
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  margin: 16px 0 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  color: var(--fg);
+}
+
+nav a[aria-current="page"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+}
+
+nav.groups {
+  gap: 4px 16px;
+  margin: 0 0 8px;
+  border-bottom: 0;
+  font-size: 14px;
+}
+
+nav.groups a {
+  font-weight: 400;
+}
+
+h2[id],
+h3[id] {
+  scroll-margin-top: 16px;
+}
+
+.intro,
+.empty {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.intro p,
+.intro ul {
+  margin: 0 0 8px;
+}
+
+.clips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.clips > li {
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.about > p {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.about > p.credit {
+  margin: -4px 0 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.note {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.note p {
+  margin: 0;
+}
+
+audio {
+  display: block;
+  width: 100%;
+}
+
+/* The Real or Robot quiz. Plain CSS shows each verdict and keeps score by counting the picked buttons. */
+
+.quiz {
+  counter-reset: right answered;
+}
+
+/* Only the picked page of clips is shown (quiz.css). Hidden pages stay rendered so their answers still count. */
+.quiz .group {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.quiz .group h3 {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Each clip is one row: label, player and the two buttons, with the verdict below once it's answered. */
+.questions {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.questions > li {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.questions > li > p {
+  flex: 0 0 4.5rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.questions > li > audio {
+  flex: 1 1 14rem;
+  width: auto;
+  min-width: 0;
+}
+
+.quiz fieldset {
+  display: flex;
+  flex: 0 0 13rem;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .questions > li > p,
+  .questions > li > audio,
+  .quiz fieldset {
+    flex-basis: 100%;
+  }
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.quiz .pager label {
+  flex: 0 0 auto;
+  min-width: 7rem;
+  background: var(--surface);
+  color: var(--fg);
+}
+
+.quiz legend,
+.quiz input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.quiz label {
+  flex: 1;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.quiz label:hover {
+  border-color: var(--accent);
+}
+
+.quiz input:focus-visible + label {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.quiz input:checked + label {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.quiz input.right:checked {
+  counter-increment: right answered;
+}
+
+.quiz input.wrong:checked {
+  counter-increment: answered;
+}
+
+/* Once a clip is answered, its buttons stop responding to clicks and the right one is outlined. */
+.questions > li:has(input:checked) label {
+  pointer-events: none;
+}
+
+.questions > li:has(input:checked) input.right + label {
+  box-shadow: 0 0 0 2px var(--good);
+}
+
+.verdict {
+  display: none;
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.questions > li:has(input:checked) .verdict {
+  display: block;
+}
+
+.verdict p {
+  margin: 0;
+}
+
+.if-right,
+.if-wrong {
+  display: none;
+  font-weight: 700;
+}
+
+.if-right {
+  color: var(--good);
+}
+
+.if-wrong {
+  color: var(--bad);
+}
+
+.questions > li:has(input.right:checked) .if-right,
+.questions > li:has(input.wrong:checked) .if-wrong {
+  display: block;
+}
+
+.score {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin: 16px 0 0;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.score p {
+  margin: 0;
+}
+
+.tally {
+  font-weight: 700;
+}
+
+.tally::after {
+  content: counter(right) " right of " counter(answered) " answered";
+}
+
+.total {
+  color: var(--muted);
+}
+
+.score button {
+  margin-left: auto;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+
+.credit .real {
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--good);
+  border-radius: 4px;
+  color: var(--good);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.credit .real {
+  white-space: nowrap;
+}
+
+/* One clip per row on pages comparing real recordings with the bots: label and credit, then the player. */
+.clips.rows {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.clips.rows > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.clips.rows > li > .about,
+.clips.rows > li > audio {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.clips.rows .about > :last-child {
+  margin-bottom: 0;
+}
+
