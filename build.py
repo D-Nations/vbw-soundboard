@@ -1,7 +1,11 @@
 """Build the soundboard's static site from clips.json, with no JavaScript.
 
-Checks the manifest, then writes _site/ with index.html, the stylesheet and the clips. The GitHub Action
-runs this on every push and deploys _site/ to GitHub Pages.
+clips.json holds the site's title and its tabs. Each tab has a label, an intro written in a small subset of
+Markdown, and its clips. The first tab becomes index.html and every other tab <id>.html, each page with the
+same tab bar and the same AI-generated notice, which isn't part of the editable text so it can't be dropped.
+
+Checks the manifest, then writes _site/ with the pages, the stylesheet and the clips. The GitHub Action runs
+this on every push and deploys _site/ to GitHub Pages.
 
 Run with: python build.py [--check]
 """
@@ -9,9 +13,9 @@ Run with: python build.py [--check]
 import argparse
 import html
 import json
+import re
 import shutil
 import sys
-from dataclasses import dataclass
 from pathlib import Path
 from typing import TypedDict, cast
 
@@ -25,37 +29,27 @@ CONTENT_SECURITY_POLICY = (
     "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; "
     "upgrade-insecure-requests"
 )
-
-
-class VoiceEntry(TypedDict):
-    id: str
-    label: str
-    description: str
+TAB_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
 
 class ClipEntry(TypedDict):
     id: str
     label: str
-    voice: str
+    voices: list[str]  # Voice names as shown, like DaveBot.
+    note: str  # Markdown, may be empty.
     file: str
+
+
+class TabEntry(TypedDict):
+    id: str
+    label: str
+    intro: str  # Markdown, may be empty.
+    clips: list[ClipEntry]
 
 
 class Manifest(TypedDict):
     title: str
-    voices: list[VoiceEntry]
-    clips: list[ClipEntry]
-
-
-@dataclass(frozen=True)
-class Clip:
-    id: str
-    label: str
-    voice: str
-    path: Path
-
-    @property
-    def media_type(self) -> str:
-        return AUDIO_TYPES[self.path.suffix.lower()]
+    tabs: list[TabEntry]
 
 
 def read_manifest(path: Path = MANIFEST) -> Manifest:
@@ -66,62 +60,120 @@ def read_manifest(path: Path = MANIFEST) -> Manifest:
     return cast(Manifest, data)
 
 
+def page_name(manifest: Manifest, tab: TabEntry) -> str:
+    """The first tab is the home page. The rest are named after their ids."""
+    return "index.html" if tab is manifest["tabs"][0] else f"{tab['id']}.html"
+
+
 def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
     """Everything wrong with the manifest and its files. Empty when the site can be built."""
     problems = []
-    voices = {voice["id"] for voice in manifest["voices"]}
-    seen: set[str] = set()
-    for n, clip in enumerate(manifest["clips"], start=1):
-        where = f"clip {n} ({clip.get('id', '?')})"
-        missing = [key for key in ("id", "label", "voice", "file") if not clip.get(key)]
-        if missing:
-            problems.append(f"{where} is missing {', '.join(missing)}.")
+    if not manifest.get("title"):
+        problems.append("The site has no title.")
+    if not manifest.get("tabs"):
+        problems.append("The site has no tabs.")
+    tab_ids: set[str] = set()
+    for t, tab in enumerate(manifest.get("tabs", []), start=1):
+        where_tab = f"tab {t} ({tab.get('id', '?')})"
+        if not tab.get("id") or not tab.get("label"):
+            problems.append(f"{where_tab} needs an id and a label.")
             continue
-        if clip["id"] in seen:
-            problems.append(f"{where} has an id that's already used.")
-        seen.add(clip["id"])
-        if clip["voice"] not in voices:
-            problems.append(f"{where} uses the unknown voice {clip['voice']!r}.")
-        path = root / clip["file"]
-        if not path.resolve().is_relative_to((root / "clips").resolve()):
-            problems.append(f"{where} must point into clips/.")
-        elif path.suffix.lower() not in AUDIO_TYPES:
-            problems.append(f"{where} is a {path.suffix or 'extensionless'} file, not one of {', '.join(AUDIO_TYPES)}.")
-        elif not path.is_file():
-            problems.append(f"{where} points to {clip['file']}, which doesn't exist.")
-        elif path.stat().st_size > MAX_CLIP_BYTES:
-            problems.append(
-                f"{where} is {path.stat().st_size / 1e6:.1f} MB, over the {MAX_CLIP_BYTES / 1e6:.0f} MB limit."
-            )
+        if not TAB_ID.match(tab["id"]) or tab["id"] == "index":
+            problems.append(f"{where_tab} needs an id of lowercase letters, digits and dashes, other than index.")
+        if tab["id"] in tab_ids:
+            problems.append(f"{where_tab} has an id that's already used.")
+        tab_ids.add(tab["id"])
+        clip_ids: set[str] = set()
+        for n, clip in enumerate(tab.get("clips", []), start=1):
+            where = f"{where_tab}, clip {n} ({clip.get('id', '?')})"
+            missing = [key for key in ("id", "label", "voices", "file") if not clip.get(key)]
+            if missing:
+                problems.append(f"{where} is missing {', '.join(missing)}.")
+                continue
+            if clip["id"] in clip_ids:
+                problems.append(f"{where} has an id that's already used in this tab.")
+            clip_ids.add(clip["id"])
+            path = root / clip["file"]
+            if not path.resolve().is_relative_to((root / "clips").resolve()):
+                problems.append(f"{where} must point into clips/.")
+            elif path.suffix.lower() not in AUDIO_TYPES:
+                problems.append(f"{where} is a {path.suffix or 'extensionless'} file, not one of {', '.join(AUDIO_TYPES)}.")
+            elif not path.is_file():
+                problems.append(f"{where} points to {clip['file']}, which doesn't exist.")
+            elif path.stat().st_size > MAX_CLIP_BYTES:
+                problems.append(
+                    f"{where} is {path.stat().st_size / 1e6:.1f} MB, over the {MAX_CLIP_BYTES / 1e6:.0f} MB limit."
+                )
     return problems
 
 
-def render(manifest: Manifest, root: Path = ROOT) -> str:
-    """The page: one section per voice, one native audio player per clip."""
-    esc = html.escape
-    clips = [Clip(c["id"], c["label"], c["voice"], root / c["file"]) for c in manifest["clips"]]
-    sections = []
-    for voice in manifest["voices"]:
-        mine = [clip for clip in clips if clip.voice == voice["id"]]
-        if not mine:
+# ---------------------------------------------------------------- markdown
+
+
+def inline_markdown(text: str) -> str:
+    """Escape text, then turn `code`, **bold**, *italics* and [links](https://...) into HTML.
+
+    Links must be https:// or relative. Anything else stays as plain text.
+    """
+    out = html.escape(text, quote=False)
+    out = re.sub(r"`([^`]+)`", r"<code>\1</code>", out)
+    out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
+    out = re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"<em>\1</em>", out)
+    out = re.sub(r"(?<![\w_])_(?!\s)(.+?)(?<!\s)_(?![\w_])", r"<em>\1</em>", out)
+
+    def link(match: re.Match[str]) -> str:
+        label, url = match.group(1), html.unescape(match.group(2))
+        if re.match(r"^[a-zA-Z][a-zA-Z0-9+.-]*:", url) and not url.startswith("https://"):
+            return match.group(0)
+        return f'<a href="{html.escape(url)}">{label}</a>'
+
+    return re.sub(r"\[([^\]]+)\]\(([^)\s]+)\)", link, out)
+
+
+def markdown(text: str) -> str:
+    """A small, safe Markdown subset: paragraphs, - bullet lists and ### subheadings, with inline markup."""
+    blocks = []
+    for chunk in re.split(r"\n\s*\n", text.strip()):
+        lines = [line.strip() for line in chunk.splitlines() if line.strip()]
+        if not lines:
             continue
-        items = "\n".join(
-            f'      <li id="{esc(clip.id)}">\n'
-            f"        <p>{esc(clip.label)}</p>\n"
-            f'        <audio controls preload="none"><source src="{esc(clip.path.relative_to(root).as_posix())}"'
-            f' type="{clip.media_type}"></audio>\n'
-            f"      </li>"
-            for clip in mine
-        )
-        sections.append(
-            f'  <section aria-labelledby="{esc(voice["id"])}-heading">\n'
-            f'    <h2 id="{esc(voice["id"])}-heading">{esc(voice["label"])}</h2>\n'
-            f'    <p class="voice">{esc(voice["description"])}</p>\n'
-            f"    <ul>\n{items}\n    </ul>\n"
-            f"  </section>"
-        )
-    body = "\n".join(sections) if sections else '  <p class="empty">No clips yet.</p>'
+        if all(re.match(r"^[-*] ", line) for line in lines):
+            items = "".join(f"<li>{inline_markdown(line[2:])}</li>" for line in lines)
+            blocks.append(f"<ul>{items}</ul>")
+        elif len(lines) == 1 and lines[0].startswith("### "):
+            blocks.append(f"<h3>{inline_markdown(lines[0][4:])}</h3>")
+        else:
+            blocks.append(f"<p>{inline_markdown(' '.join(lines))}</p>")
+    return "\n".join(blocks)
+
+
+# ---------------------------------------------------------------- pages
+
+
+def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
+    """One tab's page: the title, the notice, the tab bar, the tab's intro and one native player per clip."""
+    esc = html.escape
     title = esc(manifest["title"])
+    nav = "\n".join(
+        f'    <a href="{page_name(manifest, other)}"{" aria-current=\"page\"" if other is tab else ""}>'
+        f"{esc(other['label'])}</a>"
+        for other in manifest["tabs"]
+    )
+    items = "\n".join(
+        f'    <li id="{esc(clip["id"])}">\n'
+        f"      <p>{esc(clip['label'])}</p>\n"
+        f'      <p class="credit">{esc(" & ".join(clip["voices"]))}</p>\n'
+        + (f'      <div class="note">{markdown(clip["note"])}</div>\n' if clip.get("note") else "")
+        + f'      <audio controls preload="none"><source src="{esc(Path(clip["file"]).as_posix())}"'
+        f' type="{AUDIO_TYPES[Path(clip["file"]).suffix.lower()]}"></audio>\n'
+        f"    </li>"
+        for clip in tab["clips"]
+    )
+    home = tab is manifest["tabs"][0]
+    heading = "" if home else f"  <h2>{esc(tab['label'])}</h2>\n"
+    intro = f'  <div class="intro">\n{markdown(tab["intro"])}\n  </div>\n' if tab.get("intro") else ""
+    clips = f"  <ul class=\"clips\">\n{items}\n  </ul>\n" if tab["clips"] else ("" if home else '  <p class="empty">No clips yet.</p>\n')
+    page_title = title if home else f"{esc(tab['label'])} · {title}"
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -129,18 +181,20 @@ def render(manifest: Manifest, root: Path = ROOT) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="{CONTENT_SECURITY_POLICY}">
   <meta name="referrer" content="no-referrer">
-  <title>{title}</title>
+  <title>{page_title}</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-  <h1>{title}</h1>
+  <h1><a href="index.html">{title}</a></h1>
   <p class="notice"><strong>Every voice here is AI-generated.</strong> These are synthetic imitations made with
   voice conversion models. None of these recordings were spoken by the people they sound like.</p>
+  <nav aria-label="Tabs">
+{nav}
+  </nav>
 </header>
 <main>
-{body}
-</main>
+{heading}{intro}{clips}</main>
 </body>
 </html>
 """
@@ -150,12 +204,13 @@ def build(manifest: Manifest, root: Path = ROOT, site: Path = SITE) -> None:
     if site.exists():
         shutil.rmtree(site)
     site.mkdir(parents=True)
-    (site / "index.html").write_text(render(manifest, root), encoding="utf-8")
+    for tab in manifest["tabs"]:
+        (site / page_name(manifest, tab)).write_text(render(manifest, tab, root), encoding="utf-8")
+        for clip in tab["clips"]:
+            target = site / clip["file"]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(root / clip["file"], target)
     shutil.copy(root / "style.css", site / "style.css")
-    for clip in manifest["clips"]:
-        target = site / clip["file"]
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(root / clip["file"], target)
     # Tell GitHub Pages to serve the files as they are, without Jekyll.
     (site / ".nojekyll").touch()
 
@@ -173,7 +228,8 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(1)
     if not args.check:
         build(manifest)
-        print(f"Built {len(manifest['clips'])} clips into {SITE.name}/")
+        clips = sum(len(tab["clips"]) for tab in manifest["tabs"])
+        print(f"Built {len(manifest['tabs'])} tabs with {clips} clips into {SITE.name}/")
 
 
 if __name__ == "__main__":

@@ -1,16 +1,282 @@
 {
-  "title": "Very Bad Wizards Soundboard",
-  "voices": [
+  "title": "Very Bad Robots",
+  "tabs": [
     {
-      "id": "dap9000",
+      "id": "home",
+      "label": "Home",
+      "intro": "A soundboard of AI voice clips imitating the hosts of [Very Bad Wizards](https://verybadwizards.com), made with voice conversion models trained on the podcast. Pick a tab above to listen.\n\n- **DaveBot** imitates Dave Pizarro.\n- **TamBot** imitates Tamler Sommers.",
+      "clips": []
+    },
+    {
+      "id": "tam-9000",
+      "label": "TAM-9000",
+      "intro": "HAL 9000's lines from *2001: A Space Odyssey* (1968), in TamBot's voice.",
+      "clips": [
+        {
+          "id": "intro",
+          "label": "\"Good afternoon. I am the TAM 9000. I became operational at the Very Bad Wizards plant.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/intro.mp3"
+        },
+        {
+          "id": "podbay",
+          "label": "\"Open the pod bay doors, please.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/podbay.mp3"
+        },
+        {
+          "id": "sorry",
+          "label": "\"I'm sorry, Dave. I'm afraid I can't do that.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/sorry.mp3"
+        },
+        {
+          "id": "mission",
+          "label": "\"This mission is too important for me to allow you to jeopardize it.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tam-9000/mission.mp3"
+        }
+      ]
+    },
+    {
+      "id": "dap-9000",
       "label": "DAP-9000",
-      "description": "A synthetic imitation of Dave Pizarro's voice."
+      "intro": "HAL 9000's lines from *2001: A Space Odyssey* (1968), in DaveBot's voice.",
+      "clips": [
+        {
+          "id": "intro",
+          "label": "\"Good afternoon. I am the DAP 9000. I became operational at the Very Bad Wizards plant.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/dap-9000/intro.mp3"
+        },
+        {
+          "id": "podbay",
+          "label": "\"Open the pod bay doors, please.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/dap-9000/podbay.mp3"
+        },
+        {
+          "id": "sorry",
+          "label": "\"I'm sorry, Dave. I'm afraid I can't do that.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/dap-9000/sorry.mp3"
+        },
+        {
+          "id": "mission",
+          "label": "\"This mission is too important for me to allow you to jeopardize it.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/dap-9000/mission.mp3"
+        }
+      ]
+    },
+    {
+      "id": "pizarrator",
+      "label": "Pizarrator",
+      "intro": "Lines from *The Terminator* (1984) and *Terminator 2: Judgment Day* (1991), in DaveBot's voice.",
+      "clips": [
+        {
+          "id": "intro",
+          "label": "\"I am the Pizarrator.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/pizarrator/intro.mp3"
+        },
+        {
+          "id": "back",
+          "label": "\"I'll be back.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/pizarrator/back.mp3"
+        },
+        {
+          "id": "clothes",
+          "label": "\"I need your clothes, your boots, and your motorcycle.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/pizarrator/clothes.mp3"
+        },
+        {
+          "id": "hasta",
+          "label": "\"Hasta la vista, baby.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/pizarrator/hasta.mp3"
+        },
+        {
+          "id": "hasta-b",
+          "label": "\"Hasta la vista, baby.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "",
+          "file": "clips/pizarrator/hasta-b.mp3"
+        }
+      ]
     },
     {
       "id": "tamlerator",
       "label": "Tamlerator",
-      "description": "A synthetic imitation of Tamler Sommers's voice."
+      "intro": "Lines from *The Terminator* (1984) and *Terminator 2: Judgment Day* (1991), in TamBot's voice.",
+      "clips": [
+        {
+          "id": "intro",
+          "label": "\"I am the Tamlerator.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tamlerator/intro.mp3"
+        },
+        {
+          "id": "back",
+          "label": "\"I'll be back.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tamlerator/back.mp3"
+        },
+        {
+          "id": "clothes",
+          "label": "\"I need your clothes, your boots, and your motorcycle.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tamlerator/clothes.mp3"
+        },
+        {
+          "id": "hasta",
+          "label": "\"Hasta la vista, baby.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "",
+          "file": "clips/tamlerator/hasta.mp3"
+        }
+      ]
+    },
+    {
+      "id": "empire",
+      "label": "The Empire Strikes Back",
+      "intro": "Han and Leia, from *The Empire Strikes Back* (1980). The film's score plays under the new voices.",
+      "clips": [
+        {
+          "id": "d-loves-t",
+          "label": "d_loves_t",
+          "voices": [
+            "DaveBot",
+            "TamBot"
+          ],
+          "note": "Leia as DaveBot, Han as TamBot.",
+          "file": "clips/empire/d-loves-t.mp3"
+        },
+        {
+          "id": "t-loves-d",
+          "label": "t_loves_d",
+          "voices": [
+            "TamBot",
+            "DaveBot"
+          ],
+          "note": "Leia as TamBot, Han as DaveBot.",
+          "file": "clips/empire/t-loves-d.mp3"
+        }
+      ]
+    },
+    {
+      "id": "casablanca",
+      "label": "Casablanca",
+      "intro": "Three scenes from *Casablanca* (1942), each in both voices. The film's score plays under the new voices.",
+      "clips": [
+        {
+          "id": "beans-davebot",
+          "label": "\"A hill of beans\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "Rick as DaveBot.",
+          "file": "clips/casablanca/beans-davebot.mp3"
+        },
+        {
+          "id": "beans-tambot",
+          "label": "\"A hill of beans\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "Rick as TamBot.",
+          "file": "clips/casablanca/beans-tambot.mp3"
+        },
+        {
+          "id": "looking-davebot",
+          "label": "\"Here's looking at you, kid.\"",
+          "voices": [
+            "DaveBot"
+          ],
+          "note": "Rick as DaveBot.",
+          "file": "clips/casablanca/looking-davebot.mp3"
+        },
+        {
+          "id": "looking-tambot",
+          "label": "\"Here's looking at you, kid.\"",
+          "voices": [
+            "TamBot"
+          ],
+          "note": "Rick as TamBot.",
+          "file": "clips/casablanca/looking-tambot.mp3"
+        },
+        {
+          "id": "moreso-a",
+          "label": "\"Only more so.\"",
+          "voices": [
+            "DaveBot",
+            "TamBot"
+          ],
+          "note": "Annina as DaveBot, Rick as TamBot.",
+          "file": "clips/casablanca/moreso-a.mp3"
+        },
+        {
+          "id": "moreso-b",
+          "label": "\"Only more so.\"",
+          "voices": [
+            "TamBot",
+            "DaveBot"
+          ],
+          "note": "Annina as TamBot, Rick as DaveBot.",
+          "file": "clips/casablanca/moreso-b.mp3"
+        }
+      ]
     }
-  ],
-  "clips": []
+  ]
 }
