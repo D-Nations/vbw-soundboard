@@ -97,7 +97,9 @@ def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
             if not path.resolve().is_relative_to((root / "clips").resolve()):
                 problems.append(f"{where} must point into clips/.")
             elif path.suffix.lower() not in AUDIO_TYPES:
-                problems.append(f"{where} is a {path.suffix or 'extensionless'} file, not one of {', '.join(AUDIO_TYPES)}.")
+                problems.append(
+                    f"{where} is a {path.suffix or 'extensionless'} file, not one of {', '.join(AUDIO_TYPES)}."
+                )
             elif not path.is_file():
                 problems.append(f"{where} points to {clip['file']}, which doesn't exist.")
             elif path.stat().st_size > MAX_CLIP_BYTES:
@@ -155,7 +157,7 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
     esc = html.escape
     title = esc(manifest["title"])
     nav = "\n".join(
-        f'    <a href="{page_name(manifest, other)}"{" aria-current=\"page\"" if other is tab else ""}>'
+        f'    <a href="{page_name(manifest, other)}"{' aria-current="page"' if other is tab else ""}>'
         f"{esc(other['label'])}</a>"
         for other in manifest["tabs"]
     )
@@ -172,7 +174,11 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
     home = tab is manifest["tabs"][0]
     heading = "" if home else f"  <h2>{esc(tab['label'])}</h2>\n"
     intro = f'  <div class="intro">\n{markdown(tab["intro"])}\n  </div>\n' if tab.get("intro") else ""
-    clips = f"  <ul class=\"clips\">\n{items}\n  </ul>\n" if tab["clips"] else ("" if home else '  <p class="empty">No clips yet.</p>\n')
+    clips = (
+        f'  <ul class="clips">\n{items}\n  </ul>\n'
+        if tab["clips"]
+        else ("" if home else '  <p class="empty">No clips yet.</p>\n')
+    )
     page_title = title if home else f"{esc(tab['label'])} · {title}"
     return f"""<!doctype html>
 <html lang="en">
