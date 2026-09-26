@@ -389,9 +389,9 @@
           ]
         },
         {
-          "id": "dave-s-words-three-voices",
-          "label": "Dave's words, three voices",
-          "intro": "Sentences from episodes the models never trained on: the real thing, then DaveBot, then TamBot.",
+          "id": "dave-s-words-tambot-s-voice",
+          "label": "Dave's words, TamBot's voice",
+          "intro": "Sentences from episodes the models never trained on: Dave as he said them, then in TamBot's voice.",
           "clips": [
             {
               "id": "dave-deep-theme",
@@ -402,15 +402,6 @@
               "note": "From the Deadwood bonus episode.",
               "file": "clips/vbw-soundboard/dave-deep-theme.mp3",
               "real": true
-            },
-            {
-              "id": "dave-deep-theme-davebot",
-              "label": "\"That's a deep theme. I hadn't thought of it.\"",
-              "voices": [
-                "DaveBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/dave-deep-theme-davebot.mp3"
             },
             {
               "id": "dave-deep-theme-tambot",
@@ -432,15 +423,6 @@
               "real": true
             },
             {
-              "id": "dave-new-foods-davebot",
-              "label": "\"…our opening segment on willingness to try new foods.\"",
-              "voices": [
-                "DaveBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/dave-new-foods-davebot.mp3"
-            },
-            {
               "id": "dave-new-foods-tambot",
               "label": "\"…our opening segment on willingness to try new foods.\"",
               "voices": [
@@ -460,15 +442,6 @@
               "real": true
             },
             {
-              "id": "dave-psychology-davebot",
-              "label": "\"This is not a bad description of human psychology…\"",
-              "voices": [
-                "DaveBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/dave-psychology-davebot.mp3"
-            },
-            {
               "id": "dave-psychology-tambot",
               "label": "\"This is not a bad description of human psychology…\"",
               "voices": [
@@ -480,9 +453,9 @@
           ]
         },
         {
-          "id": "tamler-s-words-three-voices",
-          "label": "Tamler's words, three voices",
-          "intro": "Sentences from episodes the models never trained on: the real thing, then TamBot, then DaveBot.",
+          "id": "tamler-s-words-davebot-s-voice",
+          "label": "Tamler's words, DaveBot's voice",
+          "intro": "Sentences from episodes the models never trained on: Tamler as he said them, then in DaveBot's voice.",
           "clips": [
             {
               "id": "tamler-glasses",
@@ -493,15 +466,6 @@
               "note": "From Episode 126.",
               "file": "clips/vbw-soundboard/tamler-glasses.mp3",
               "real": true
-            },
-            {
-              "id": "tamler-glasses-tambot",
-              "label": "\"I just buy him some damn glasses.\"",
-              "voices": [
-                "TamBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/tamler-glasses-tambot.mp3"
             },
             {
               "id": "tamler-glasses-davebot",
@@ -523,15 +487,6 @@
               "real": true
             },
             {
-              "id": "tamler-odyssey-tambot",
-              "label": "\"…the Odyssey takes place in the aftermath of it.\"",
-              "voices": [
-                "TamBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/tamler-odyssey-tambot.mp3"
-            },
-            {
               "id": "tamler-odyssey-davebot",
               "label": "\"…the Odyssey takes place in the aftermath of it.\"",
               "voices": [
@@ -549,15 +504,6 @@
               "note": "From Episode 229.",
               "file": "clips/vbw-soundboard/tamler-ted-chiang.mp3",
               "real": true
-            },
-            {
-              "id": "tamler-ted-chiang-tambot",
-              "label": "\"Another very good Ted Chiang story…\"",
-              "voices": [
-                "TamBot"
-              ],
-              "note": "",
-              "file": "clips/vbw-soundboard/tamler-ted-chiang-tambot.mp3"
             },
             {
               "id": "tamler-ted-chiang-davebot",
