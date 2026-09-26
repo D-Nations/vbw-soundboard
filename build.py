@@ -28,7 +28,8 @@ ROOT = Path(__file__).resolve().parent
 MANIFEST = ROOT / "clips.json"
 SITE = ROOT / "_site"
 AUDIO_TYPES = {".mp3": "audio/mpeg", ".ogg": "audio/ogg", ".opus": "audio/ogg", ".m4a": "audio/mp4"}
-MAX_CLIP_BYTES = 2 * 1024 * 1024
+# Room for a whole episode at a low speech bitrate. Short clips are a few hundred KB.
+MAX_CLIP_BYTES = 40 * 1024 * 1024
 # Only this site's own files load, never scripts, and any http:// request is upgraded to https://.
 CONTENT_SECURITY_POLICY = (
     "default-src 'self'; script-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; "
@@ -46,6 +47,7 @@ class ClipEntry(TypedDict):
     note: str  # Markdown, may be empty. On a quiz, shown once the clip is answered.
     file: str
     answer: NotRequired[str]  # Only on a quiz tab's clips: real or robot.
+    real: NotRequired[bool]  # A real recording of the hosts, not an AI voice.
 
 
 class SectionEntry(TypedDict):
@@ -192,6 +194,10 @@ NOTICE = (
     "<strong>Every voice here is AI-generated.</strong> These are synthetic imitations made with\n"
     "  voice conversion models. None of these recordings were spoken by the people they sound like."
 )
+MIXED_NOTICE = (
+    "<strong>This page mixes real recordings with AI-generated ones.</strong> Clips marked as real\n"
+    "  recordings are the hosts themselves. Every other voice is an imitation made with voice conversion models."
+)
 QUIZ_NOTICE = (
     "<strong>This quiz mixes real recordings with AI-generated ones.</strong> Some clips are the hosts\n"
     "  themselves, and some are imitations made with voice conversion models. Each answer says which."
@@ -210,10 +216,14 @@ def render_clip(clip: ClipEntry) -> str:
     esc = html.escape
     return (
         f'    <li id="{esc(clip["id"])}">\n'
-        f"      <p>{esc(clip['label'])}</p>\n"
-        f'      <p class="credit">{esc(" & ".join(clip["voices"]))}</p>\n'
-        + (f'      <div class="note">{markdown(clip["note"])}</div>\n' if clip.get("note") else "")
-        + f"      {audio_tag(clip)}\n"
+        '      <div class="about">\n'
+        f"        <p>{esc(clip['label'])}</p>\n"
+        f'        <p class="credit">{esc(" & ".join(clip["voices"]))}'
+        + (' <span class="real">Real recording</span>' if clip.get("real") else "")
+        + "</p>\n"
+        + (f'        <div class="note">{markdown(clip["note"])}</div>\n' if clip.get("note") else "")
+        + "      </div>\n"
+        f"      {audio_tag(clip)}\n"
         "    </li>"
     )
 
@@ -298,8 +308,11 @@ def render_sections(tab: TabEntry, level: int) -> str:
     """Each group's heading, intro and clips, after a list of links to the groups when there's more than one.
 
     level is the headings' level: 2 on the home page, which has no tab heading, and 3 under a tab's heading.
+    A tab with real recordings compares them with the bots, so it lists one clip per row, each original just above
+    its versions. Other tabs lay clips out in a grid.
     """
     esc = html.escape
+    layout = "clips rows" if any(clip.get("real") for clip in tab_clips(tab)) else "clips"
     named = [section for section in tab["sections"] if section["label"]]
     parts = []
     if len(named) > 1:
@@ -313,7 +326,7 @@ def render_sections(tab: TabEntry, level: int) -> str:
         if section.get("intro"):
             parts.append(f'  <div class="intro">\n{markdown(section["intro"])}\n  </div>\n')
         items = "\n".join(render_clip(clip) for clip in section["clips"])
-        parts.append(f'  <ul class="clips">\n{items}\n  </ul>\n')
+        parts.append(f'  <ul class="{layout}">\n{items}\n  </ul>\n')
     return "".join(parts)
 
 
@@ -335,7 +348,12 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
         clips = render_sections(tab, level=2 if home else 3)
     else:
         clips = "" if home else '  <p class="empty">No clips yet.</p>\n'
-    notice = QUIZ_NOTICE if is_quiz(tab) else NOTICE
+    if is_quiz(tab):
+        notice = QUIZ_NOTICE
+    elif any(clip.get("real") for clip in tab_clips(tab)):
+        notice = MIXED_NOTICE
+    else:
+        notice = NOTICE
     quiz_link = '  <link rel="stylesheet" href="quiz.css">\n' if is_quiz(tab) else ""
     page_title = title if home else f"{esc(tab['label'])} · {title}"
     return f"""<!doctype html>

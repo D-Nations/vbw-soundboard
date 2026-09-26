@@ -134,12 +134,12 @@ h3[id] {
   background: var(--surface);
 }
 
-.clips > li > p {
+.about > p {
   margin: 0 0 8px;
   font-weight: 600;
 }
 
-.clips > li > p.credit {
+.about > p.credit {
   margin: -4px 0 8px;
   color: var(--muted);
   font-size: 14px;
@@ -376,3 +376,41 @@ audio {
   font: inherit;
   cursor: pointer;
 }
+
+.credit .real {
+  margin-left: 6px;
+  padding: 1px 6px;
+  border: 1px solid var(--good);
+  border-radius: 4px;
+  color: var(--good);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.credit .real {
+  white-space: nowrap;
+}
+
+/* One clip per row on pages comparing real recordings with the bots: label and credit, then the player. */
+.clips.rows {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.clips.rows > li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.clips.rows > li > .about,
+.clips.rows > li > audio {
+  flex: 1 1 18rem;
+  min-width: 0;
+}
+
+.clips.rows .about > :last-child {
+  margin-bottom: 0;
+}
+

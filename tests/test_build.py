@@ -93,6 +93,23 @@ class BuildTest(unittest.TestCase):
         self.assertIn("<em>2001</em>", page)
         self.assertIn('<source src="clips/dap-9000/hello.mp3" type="audio/mpeg">', page)
 
+    def test_real_recordings_are_marked_and_change_the_notice(self) -> None:
+        board = manifest(
+            tab("home", clip("a")),
+            tab("vbw", clip("b", voices=["Dave Pizarro"], real=True), clip("c")),
+        )
+
+        home = render(board, board["tabs"][0], self.root)
+        vbw = render(board, board["tabs"][1], self.root)
+
+        self.assertIn("Every voice here is AI-generated", home)
+        self.assertNotIn("Real recording", home)
+        self.assertIn("mixes real recordings with AI-generated ones", vbw)
+        self.assertIn('Dave Pizarro <span class="real">Real recording</span></p>', vbw)
+        self.assertEqual(vbw.count('class="real"'), 1)
+        self.assertIn('<ul class="clips rows">', vbw)
+        self.assertNotIn("clips rows", home)
+
     def test_the_page_escapes_text_and_needs_no_javascript(self) -> None:
         board = manifest(tab("home"), tab("hi", clip(label="<Hi & bye>")))
 

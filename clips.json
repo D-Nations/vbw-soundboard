@@ -2,8 +2,8 @@
   "title": "Very Bad Robots",
   "tabs": [
     {
-      "id": "soundboard",
-      "label": "Soundboard",
+      "id": "culture-soundboard",
+      "label": "Culture Soundboard",
       "intro": "A soundboard of AI voice clips imitating the hosts of [Very Bad Wizards](https://verybadwizards.com), made with voice conversion models trained on the podcast.\n\n- **DaveBot** imitates Dave Pizarro.\n- **TamBot** imitates Tamler Sommers.",
       "sections": [
         {
@@ -18,7 +18,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/podbay.mp3"
+              "file": "clips/culture-soundboard/podbay.mp3"
             },
             {
               "id": "sorry",
@@ -27,7 +27,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/sorry.mp3"
+              "file": "clips/culture-soundboard/sorry.mp3"
             },
             {
               "id": "mission",
@@ -36,7 +36,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/mission.mp3"
+              "file": "clips/culture-soundboard/mission.mp3"
             },
             {
               "id": "goodbye",
@@ -45,7 +45,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/goodbye.mp3"
+              "file": "clips/culture-soundboard/goodbye.mp3"
             },
             {
               "id": "daisy_daisy",
@@ -54,7 +54,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/daisy_daisy.mp3"
+              "file": "clips/culture-soundboard/daisy_daisy.mp3"
             }
           ]
         },
@@ -70,7 +70,7 @@
                 "DaveBot"
               ],
               "note": "Rick as DaveBot.",
-              "file": "clips/soundboard/beans-davebot.mp3"
+              "file": "clips/culture-soundboard/beans-davebot.mp3"
             },
             {
               "id": "looking-davebot",
@@ -79,7 +79,7 @@
                 "DaveBot"
               ],
               "note": "Rick as DaveBot.",
-              "file": "clips/soundboard/looking-davebot.mp3"
+              "file": "clips/culture-soundboard/looking-davebot.mp3"
             },
             {
               "id": "moreso-b",
@@ -89,7 +89,7 @@
                 "DaveBot"
               ],
               "note": "Annina as TamBot, Rick as DaveBot.",
-              "file": "clips/soundboard/moreso-b.mp3"
+              "file": "clips/culture-soundboard/moreso-b.mp3"
             }
           ]
         },
@@ -105,7 +105,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/cybernetic_organism.mp3"
+              "file": "clips/culture-soundboard/cybernetic_organism.mp3"
             },
             {
               "id": "back",
@@ -114,7 +114,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/back.mp3"
+              "file": "clips/culture-soundboard/back.mp3"
             },
             {
               "id": "clothes",
@@ -123,7 +123,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/clothes.mp3"
+              "file": "clips/culture-soundboard/clothes.mp3"
             },
             {
               "id": "hasta",
@@ -132,7 +132,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/hasta.mp3"
+              "file": "clips/culture-soundboard/hasta.mp3"
             }
           ]
         },
@@ -148,7 +148,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/prudent.mp3"
+              "file": "clips/culture-soundboard/prudent.mp3"
             },
             {
               "id": "cowbell",
@@ -157,7 +157,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/cowbell.mp3"
+              "file": "clips/culture-soundboard/cowbell.mp3"
             },
             {
               "id": "government_cheese",
@@ -166,7 +166,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/government_cheese.mp3"
+              "file": "clips/culture-soundboard/government_cheese.mp3"
             },
             {
               "id": "barbarra",
@@ -175,7 +175,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/barbarra.mp3"
+              "file": "clips/culture-soundboard/barbarra.mp3"
             }
           ]
         },
@@ -192,7 +192,7 @@
                 "TamBot"
               ],
               "note": "Leia as DaveBot, Han as TamBot.",
-              "file": "clips/soundboard/d-loves-t.mp3"
+              "file": "clips/culture-soundboard/d-loves-t.mp3"
             },
             {
               "id": "t-loves-d",
@@ -202,7 +202,7 @@
                 "DaveBot"
               ],
               "note": "Leia as TamBot, Han as DaveBot.",
-              "file": "clips/soundboard/t-loves-d.mp3"
+              "file": "clips/culture-soundboard/t-loves-d.mp3"
             }
           ]
         },
@@ -218,7 +218,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/kennedy_moon.mp3"
+              "file": "clips/culture-soundboard/kennedy_moon.mp3"
             },
             {
               "id": "oh_the_humanity",
@@ -227,7 +227,7 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/oh_the_humanity.mp3"
+              "file": "clips/culture-soundboard/oh_the_humanity.mp3"
             },
             {
               "id": "tam_carter",
@@ -236,7 +236,7 @@
                 "TamBot"
               ],
               "note": "",
-              "file": "clips/soundboard/tam_carter.mp3"
+              "file": "clips/culture-soundboard/tam_carter.mp3"
             },
             {
               "id": "muhammed_ali",
@@ -245,7 +245,328 @@
                 "DaveBot"
               ],
               "note": "",
-              "file": "clips/soundboard/muhammed_ali.mp3"
+              "file": "clips/culture-soundboard/muhammed_ali.mp3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vbw-soundboard",
+      "label": "VBW Soundboard",
+      "intro": "Clips from Very Bad Wizards itself. Clips marked **Real recording** are Dave and Tamler as they sounded on the show. Everything else is the same audio run through DaveBot or TamBot.",
+      "sections": [
+        {
+          "id": "the-whole-episode-swapped",
+          "label": "The whole episode, swapped",
+          "intro": "Episode 249, *Phlegm and Carelessness (Hume's The Sceptic)*, with every one of Dave's lines in TamBot's voice and every one of Tamler's in DaveBot's. Music and quoted clips play as they were.",
+          "clips": [
+            {
+              "id": "ep249-swapped",
+              "label": "Episode 249, fully swapped",
+              "voices": [
+                "DaveBot",
+                "TamBot"
+              ],
+              "note": "All 85 minutes.",
+              "file": "clips/vbw-soundboard/ep249-swapped.mp3"
+            }
+          ]
+        },
+        {
+          "id": "before-and-after",
+          "label": "Before and after",
+          "intro": "Three stretches of Episode 249 where the hosts trade lines quickly, first as they were and then swapped.",
+          "clips": [
+            {
+              "id": "ep249-0420-original",
+              "label": "4:20, as it was",
+              "voices": [
+                "Dave Pizarro",
+                "Tamler Sommers"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-0420-original.mp3",
+              "real": true
+            },
+            {
+              "id": "ep249-0420-swapped",
+              "label": "4:20, swapped",
+              "voices": [
+                "DaveBot",
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-0420-swapped.mp3"
+            },
+            {
+              "id": "ep249-3705-original",
+              "label": "37:05, as it was",
+              "voices": [
+                "Dave Pizarro",
+                "Tamler Sommers"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-3705-original.mp3",
+              "real": true
+            },
+            {
+              "id": "ep249-3705-swapped",
+              "label": "37:05, swapped",
+              "voices": [
+                "DaveBot",
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-3705-swapped.mp3"
+            },
+            {
+              "id": "ep249-8230-original",
+              "label": "82:30, as it was",
+              "voices": [
+                "Dave Pizarro",
+                "Tamler Sommers"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-8230-original.mp3",
+              "real": true
+            },
+            {
+              "id": "ep249-8230-swapped",
+              "label": "82:30, swapped",
+              "voices": [
+                "DaveBot",
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/ep249-8230-swapped.mp3"
+            }
+          ]
+        },
+        {
+          "id": "introductions",
+          "label": "Introductions",
+          "intro": "Each host introducing himself, in his own voice and then in the other host's.",
+          "clips": [
+            {
+              "id": "intro-tamler",
+              "label": "\"Welcome to Very Bad Wizards. I'm Tamler Sommers…\"",
+              "voices": [
+                "Tamler Sommers"
+              ],
+              "note": "From Episode 215.",
+              "file": "clips/vbw-soundboard/intro-tamler.mp3",
+              "real": true
+            },
+            {
+              "id": "intro-tamler-davebot",
+              "label": "\"Welcome to Very Bad Wizards. I'm Tamler Sommers…\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "Tamler's intro in DaveBot's voice.",
+              "file": "clips/vbw-soundboard/intro-tamler-davebot.mp3"
+            },
+            {
+              "id": "intro-dave",
+              "label": "\"My name is David Pizarro from Cornell University.\"",
+              "voices": [
+                "Dave Pizarro"
+              ],
+              "note": "From Episode 195.",
+              "file": "clips/vbw-soundboard/intro-dave.mp3",
+              "real": true
+            },
+            {
+              "id": "intro-dave-tambot",
+              "label": "\"My name is David Pizarro from Cornell University.\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "Dave's intro in TamBot's voice. It struggles with his name.",
+              "file": "clips/vbw-soundboard/intro-dave-tambot.mp3"
+            }
+          ]
+        },
+        {
+          "id": "dave-s-words-three-voices",
+          "label": "Dave's words, three voices",
+          "intro": "Sentences from episodes the models never trained on: the real thing, then DaveBot, then TamBot.",
+          "clips": [
+            {
+              "id": "dave-deep-theme",
+              "label": "\"That's a deep theme. I hadn't thought of it.\"",
+              "voices": [
+                "Dave Pizarro"
+              ],
+              "note": "From the Deadwood bonus episode.",
+              "file": "clips/vbw-soundboard/dave-deep-theme.mp3",
+              "real": true
+            },
+            {
+              "id": "dave-deep-theme-davebot",
+              "label": "\"That's a deep theme. I hadn't thought of it.\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-deep-theme-davebot.mp3"
+            },
+            {
+              "id": "dave-deep-theme-tambot",
+              "label": "\"That's a deep theme. I hadn't thought of it.\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-deep-theme-tambot.mp3"
+            },
+            {
+              "id": "dave-new-foods",
+              "label": "\"…our opening segment on willingness to try new foods.\"",
+              "voices": [
+                "Dave Pizarro"
+              ],
+              "note": "From Episode 219.",
+              "file": "clips/vbw-soundboard/dave-new-foods.mp3",
+              "real": true
+            },
+            {
+              "id": "dave-new-foods-davebot",
+              "label": "\"…our opening segment on willingness to try new foods.\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-new-foods-davebot.mp3"
+            },
+            {
+              "id": "dave-new-foods-tambot",
+              "label": "\"…our opening segment on willingness to try new foods.\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-new-foods-tambot.mp3"
+            },
+            {
+              "id": "dave-psychology",
+              "label": "\"This is not a bad description of human psychology…\"",
+              "voices": [
+                "Dave Pizarro"
+              ],
+              "note": "From Episode 209.",
+              "file": "clips/vbw-soundboard/dave-psychology.mp3",
+              "real": true
+            },
+            {
+              "id": "dave-psychology-davebot",
+              "label": "\"This is not a bad description of human psychology…\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-psychology-davebot.mp3"
+            },
+            {
+              "id": "dave-psychology-tambot",
+              "label": "\"This is not a bad description of human psychology…\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/dave-psychology-tambot.mp3"
+            }
+          ]
+        },
+        {
+          "id": "tamler-s-words-three-voices",
+          "label": "Tamler's words, three voices",
+          "intro": "Sentences from episodes the models never trained on: the real thing, then TamBot, then DaveBot.",
+          "clips": [
+            {
+              "id": "tamler-glasses",
+              "label": "\"I just buy him some damn glasses.\"",
+              "voices": [
+                "Tamler Sommers"
+              ],
+              "note": "From Episode 126.",
+              "file": "clips/vbw-soundboard/tamler-glasses.mp3",
+              "real": true
+            },
+            {
+              "id": "tamler-glasses-tambot",
+              "label": "\"I just buy him some damn glasses.\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-glasses-tambot.mp3"
+            },
+            {
+              "id": "tamler-glasses-davebot",
+              "label": "\"I just buy him some damn glasses.\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-glasses-davebot.mp3"
+            },
+            {
+              "id": "tamler-odyssey",
+              "label": "\"…the Odyssey takes place in the aftermath of it.\"",
+              "voices": [
+                "Tamler Sommers"
+              ],
+              "note": "From The Lotus Eaters, Episode 1.",
+              "file": "clips/vbw-soundboard/tamler-odyssey.mp3",
+              "real": true
+            },
+            {
+              "id": "tamler-odyssey-tambot",
+              "label": "\"…the Odyssey takes place in the aftermath of it.\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-odyssey-tambot.mp3"
+            },
+            {
+              "id": "tamler-odyssey-davebot",
+              "label": "\"…the Odyssey takes place in the aftermath of it.\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-odyssey-davebot.mp3"
+            },
+            {
+              "id": "tamler-ted-chiang",
+              "label": "\"Another very good Ted Chiang story…\"",
+              "voices": [
+                "Tamler Sommers"
+              ],
+              "note": "From Episode 229.",
+              "file": "clips/vbw-soundboard/tamler-ted-chiang.mp3",
+              "real": true
+            },
+            {
+              "id": "tamler-ted-chiang-tambot",
+              "label": "\"Another very good Ted Chiang story…\"",
+              "voices": [
+                "TamBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-ted-chiang-tambot.mp3"
+            },
+            {
+              "id": "tamler-ted-chiang-davebot",
+              "label": "\"Another very good Ted Chiang story…\"",
+              "voices": [
+                "DaveBot"
+              ],
+              "note": "",
+              "file": "clips/vbw-soundboard/tamler-ted-chiang-davebot.mp3"
             }
           ]
         }
