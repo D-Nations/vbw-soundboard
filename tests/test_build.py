@@ -162,6 +162,27 @@ class BuildTest(unittest.TestCase):
         self.assertNotIn('class="credit"', page)
         self.assertNotIn("<script", page)
 
+    def test_a_quiz_shows_five_clips_a_page_with_previous_and_next(self) -> None:
+        clips = [clip(f"q{n}", answer="real") for n in range(1, 8)]
+        board = manifest(tab("home"), tab("quiz", *clips))
+        site = self.root / "_site"
+
+        page = render(board, board["tabs"][1], self.root)
+        build(board, self.root, site)
+
+        self.assertIn('id="quiz-page-1" class="page" aria-label="Page 1 of 2" checked>', page)
+        self.assertIn('id="quiz-page-2" class="page" aria-label="Page 2 of 2">', page)
+        self.assertIn("Clips 1–5 of 7", page)
+        self.assertIn("Clips 6–7 of 7", page)
+        self.assertIn('<label for="quiz-page-2" class="next">', page)
+        self.assertIn('<label for="quiz-page-1" class="previous">', page)
+        self.assertEqual(page.count('class="next"'), 1)
+        self.assertLess(page.index('id="q5"'), page.index('id="quiz-group-2"'), "q5 belongs to page 1")
+        self.assertIn('href="quiz.css"', page)
+        css = (site / "quiz.css").read_text(encoding="utf-8")
+        self.assertIn("#quiz-page-2:checked ~ .groups > #quiz-group-2 {", css)
+        self.assertNotIn('href="quiz.css"', render(board, board["tabs"][0], self.root))
+
     def test_every_clip_in_a_quiz_needs_an_answer(self) -> None:
         bad = manifest(tab("home"), tab("quiz", clip("q1", answer="robot"), clip("q2"), clip("q3", answer="fake")))
 

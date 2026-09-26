@@ -36,6 +36,7 @@ CONTENT_SECURITY_POLICY = (
 )
 TAB_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ANSWERS = ("real", "robot")
+QUIZ_PAGE_SIZE = 5  # Clips shown at a time on a quiz tab.
 
 
 class ClipEntry(TypedDict):
@@ -217,40 +218,79 @@ def render_clip(clip: ClipEntry) -> str:
     )
 
 
-def render_quiz(tab: TabEntry) -> str:
-    """Each clip with Real and Robot radio buttons, then a running score.
-
-    Each button is marked right or wrong. style.css shows the matching verdict and the clip's note once one is
-    picked, and counts the picked buttons with CSS counters for the score. Start over resets the form.
-    """
+def render_question(clip: ClipEntry) -> str:
+    """One quiz clip on its own row: its label, player, Real and Robot buttons, and the verdict once answered."""
     esc = html.escape
-    questions = []
-    for clip in tab_clips(tab):
-        clip_id = esc(clip["id"])
-        buttons = "".join(
-            f'\n        <input type="radio" name="{clip_id}" id="{clip_id}-{answer}" value="{answer}"'
-            f' class="{"right" if answer == clip.get("answer") else "wrong"}">'
-            f'<label for="{clip_id}-{answer}">{answer.capitalize()}</label>'
-            for answer in ANSWERS
+    clip_id = esc(clip["id"])
+    buttons = "".join(
+        f'\n          <input type="radio" name="{clip_id}" id="{clip_id}-{answer}" value="{answer}"'
+        f' class="{"right" if answer == clip.get("answer") else "wrong"}">'
+        f'<label for="{clip_id}-{answer}">{answer.capitalize()}</label>'
+        for answer in ANSWERS
+    )
+    note = markdown(clip["note"]) if clip.get("note") else ""
+    return (
+        f'      <li id="{clip_id}">\n'
+        f"        <p>{esc(clip['label'])}</p>\n"
+        f"        {audio_tag(clip)}\n"
+        f"        <fieldset>\n          <legend>Real or robot?</legend>{buttons}\n        </fieldset>\n"
+        f'        <div class="verdict"><p class="if-right">Right!</p><p class="if-wrong">Wrong.</p>{note}</div>\n'
+        "      </li>"
+    )
+
+
+def quiz_pages(tab: TabEntry) -> int:
+    return -(-len(tab_clips(tab)) // QUIZ_PAGE_SIZE)
+
+
+def render_quiz(tab: TabEntry) -> str:
+    """The quiz, QUIZ_PAGE_SIZE clips at a time, with Previous and Next buttons and a running score.
+
+    Each answer button is marked right or wrong. style.css shows the matching verdict and the clip's note once one
+    is picked, and counts the picked buttons with CSS counters for the score.
+
+    The pages are a hidden group of radio buttons, one per page, and Previous and Next are labels for the pages
+    either side. quiz.css (see quiz_css) shows the page whose button is picked. Every page stays in the one form,
+    so answers and the score carry across pages, and Start over resets the form to the first page.
+    """
+    clips = tab_clips(tab)
+    pages = quiz_pages(tab)
+    radios = "\n".join(
+        f'  <input type="radio" name="quiz-page" id="quiz-page-{n}" class="page"'
+        f' aria-label="Page {n} of {pages}"{" checked" if n == 1 else ""}>'
+        for n in range(1, pages + 1)
+    )
+    groups = []
+    for n in range(1, pages + 1):
+        first = (n - 1) * QUIZ_PAGE_SIZE
+        chunk = clips[first : first + QUIZ_PAGE_SIZE]
+        previous = f'<label for="quiz-page-{n - 1}" class="previous">‹ Previous</label>' if n > 1 else "<span></span>"
+        after = f'<label for="quiz-page-{n + 1}" class="next">Next ›</label>' if n < pages else "<span></span>"
+        items = "\n".join(render_question(clip) for clip in chunk)
+        groups.append(
+            f'    <section class="group" id="quiz-group-{n}">\n'
+            f"      <h3>Clips {first + 1}–{first + len(chunk)} of {len(clips)}</h3>\n"
+            f'      <ol class="questions" start="{first + 1}">\n{items}\n      </ol>\n'
+            f'      <div class="pager">{previous}<span>Page {n} of {pages}</span>{after}</div>\n'
+            "    </section>"
         )
-        note = markdown(clip["note"]) if clip.get("note") else ""
-        questions.append(
-            f'    <li id="{clip_id}">\n'
-            f"      <p>{esc(clip['label'])}</p>\n"
-            f"      {audio_tag(clip)}\n"
-            f"      <fieldset>\n        <legend>Real or robot?</legend>{buttons}\n"
-            f'        <div class="verdict"><p class="if-right">Right!</p><p class="if-wrong">Wrong.</p>{note}</div>\n'
-            "      </fieldset>\n"
-            "    </li>"
-        )
-    items = "\n".join(questions)
+    body = "\n".join(groups)
     return (
         '  <form class="quiz" autocomplete="off">\n'
-        f'  <ol class="clips questions">\n{items}\n  </ol>\n'
-        f'  <div class="score"><p class="tally">Your score: </p><p class="total">'
-        f"out of {len(tab_clips(tab))} clips</p>"
+        f"{radios}\n"
+        f'  <div class="groups">\n{body}\n  </div>\n'
+        f'  <div class="score"><p class="tally">Your score: </p><p class="total">out of {len(clips)} clips</p>'
         '<button type="reset">Start over</button></div>\n'
         "  </form>\n"
+    )
+
+
+def quiz_css(pages: int) -> str:
+    """The rules that show the quiz page whose hidden page button is picked, one per page."""
+    rules = "\n".join(f"#quiz-page-{n}:checked ~ .groups > #quiz-group-{n}," for n in range(1, pages + 1))
+    return (
+        "/* Written by build.py for the quiz's pages. */\n"
+        f"{rules.rstrip(',')} {{\n  height: auto;\n  overflow: visible;\n  visibility: visible;\n}}\n"
     )
 
 
@@ -296,6 +336,7 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
     else:
         clips = "" if home else '  <p class="empty">No clips yet.</p>\n'
     notice = QUIZ_NOTICE if is_quiz(tab) else NOTICE
+    quiz_link = '  <link rel="stylesheet" href="quiz.css">\n' if is_quiz(tab) else ""
     page_title = title if home else f"{esc(tab['label'])} · {title}"
     return f"""<!doctype html>
 <html lang="en">
@@ -306,7 +347,7 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
   <meta name="referrer" content="no-referrer">
   <title>{page_title}</title>
   <link rel="stylesheet" href="style.css">
-</head>
+{quiz_link}</head>
 <body>
 <header>
   <h1><a href="index.html">{title}</a></h1>
@@ -333,6 +374,9 @@ def build(manifest: Manifest, root: Path = ROOT, site: Path = SITE) -> None:
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(root / clip["file"], target)
     shutil.copy(root / "style.css", site / "style.css")
+    pages = max((quiz_pages(tab) for tab in manifest["tabs"] if is_quiz(tab)), default=0)
+    if pages:
+        (site / "quiz.css").write_text(quiz_css(pages), encoding="utf-8")
     # Tell GitHub Pages to serve the files as they are, without Jekyll.
     (site / ".nojekyll").touch()
 
