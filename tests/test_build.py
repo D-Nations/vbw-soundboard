@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from typing import cast
 
-from build import ClipEntry, Manifest, TabEntry, build, check, markdown, render
+from build import ClipEntry, Manifest, SectionEntry, TabEntry, build, check, markdown, render
 
 
 def clip(clip_id: str = "hello", **fields: object) -> ClipEntry:
@@ -11,8 +11,16 @@ def clip(clip_id: str = "hello", **fields: object) -> ClipEntry:
     return cast(ClipEntry, defaults | fields)
 
 
-def tab(tab_id: str, *clips: ClipEntry, label: str = "", intro: str = "") -> TabEntry:
-    return {"id": tab_id, "label": label or tab_id.upper(), "intro": intro, "clips": list(clips)}
+def section(label: str, *clips: ClipEntry, intro: str = "") -> SectionEntry:
+    return {"id": label.lower().replace(" ", "-"), "label": label, "intro": intro, "clips": list(clips)}
+
+
+def tab(
+    tab_id: str, *clips: ClipEntry, label: str = "", intro: str = "", sections: list[SectionEntry] | None = None
+) -> TabEntry:
+    """A tab with its clips in one unlabeled group, or with the given groups."""
+    groups = sections if sections is not None else [section("", *clips)] if clips else []
+    return {"id": tab_id, "label": label or tab_id.upper(), "intro": intro, "sections": groups}
 
 
 def manifest(*tabs: TabEntry) -> Manifest:
@@ -110,6 +118,30 @@ class BuildTest(unittest.TestCase):
         self.assertIn("[no](javascript:alert(1))", out)
         self.assertIn("&lt;b&gt;x&lt;/b&gt;", out)
         self.assertIn("<ul><li>one</li><li><strong>two</strong></li></ul>", out)
+
+    def test_groups_get_headings_intros_and_links(self) -> None:
+        board = manifest(
+            tab(
+                "home",
+                label="Home",
+                sections=[section("TAM-9000", clip("a"), intro="From *2001*."), section("Wizard Wars", clip("b"))],
+            ),
+        )
+
+        page = render(board, board["tabs"][0], self.root)
+
+        self.assertEqual(check(board, self.root), [])
+        self.assertIn('<nav class="groups" aria-label="Groups">', page)
+        self.assertIn('<a href="#tam-9000">TAM-9000</a>', page)
+        self.assertIn('<h2 id="tam-9000">TAM-9000</h2>', page)
+        self.assertIn('<h2 id="wizard-wars">Wizard Wars</h2>', page)
+        self.assertIn("<em>2001</em>", page)
+        self.assertLess(page.index('id="a"'), page.index('id="wizard-wars"'))
+
+    def test_group_and_clip_ids_must_not_clash(self) -> None:
+        bad = manifest(tab("home", sections=[section("Hello", clip("hello"))]))
+
+        self.assertIn("already used in this tab", " ".join(check(bad, self.root)))
 
     def test_a_quiz_tab_asks_real_or_robot_and_marks_the_right_answer(self) -> None:
         board = manifest(

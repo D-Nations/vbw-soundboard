@@ -21,8 +21,9 @@ over HTTPS, and its Content Security Policy only lets it load its own files, blo
   `python -m voice_service.export_soundboard` there encodes the clips into `clips/`, one folder per tab, writes
   `clips.json` and runs `build.py`.
 - `clips.json` holds the site's title and its tabs. Each tab has an `id`, a `label` for the tab bar, an `intro` in
-  Markdown, and its clips: an `id`, the `label` shown on the page, the `voices` heard in it, an optional `note` in
-  Markdown, and its `file`.
+  Markdown, and its `sections`: groups of clips, each with an `id`, a `label` shown as its heading (empty for
+  clips without one), an `intro`, and its clips. Each clip has an `id`, the `label` shown on the page, the
+  `voices` heard in it, an optional `note` in Markdown, its `file`, and on the quiz tab its `answer`.
 - `build.py` checks the manifest (every file exists, is an audio file under `clips/`, and is under 2 MB) and
   writes the site to `_site/`: `index.html` for the first tab and `<tab id>.html` for the rest, each with the same tab
   bar and AI-generated notice. Intros and notes support a small, safe Markdown subset. It uses only the Python standard library.

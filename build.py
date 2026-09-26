@@ -1,8 +1,9 @@
 """Build the soundboard's static site from clips.json, with no JavaScript.
 
 clips.json holds the site's title and its tabs. Each tab has a label, an intro written in a small subset of
-Markdown, and its clips. The first tab becomes index.html and every other tab <id>.html, each page with the
+Markdown, and its groups of clips. The first tab becomes index.html and every other tab <id>.html, each page with the
 same tab bar and the same AI-generated notice, which isn't part of the editable text so it can't be dropped.
+A tab's clips come in groups, each shown under its own heading, with links to them at the top of the page.
 
 A tab whose clips have answers ("real" or "robot") is a quiz. Its page asks which each clip is with a pair of
 radio buttons, and plain CSS reveals the answer and keeps a running score, so it still needs no JavaScript.
@@ -46,11 +47,18 @@ class ClipEntry(TypedDict):
     answer: NotRequired[str]  # Only on a quiz tab's clips: real or robot.
 
 
+class SectionEntry(TypedDict):
+    id: str  # Empty when label is.
+    label: str  # A group's heading. Empty for clips shown without one.
+    intro: str  # Markdown, may be empty.
+    clips: list[ClipEntry]
+
+
 class TabEntry(TypedDict):
     id: str
     label: str
     intro: str  # Markdown, may be empty.
-    clips: list[ClipEntry]
+    sections: list[SectionEntry]
 
 
 class Manifest(TypedDict):
@@ -71,9 +79,13 @@ def page_name(manifest: Manifest, tab: TabEntry) -> str:
     return "index.html" if tab is manifest["tabs"][0] else f"{tab['id']}.html"
 
 
+def tab_clips(tab: TabEntry) -> list[ClipEntry]:
+    return [clip for section in tab.get("sections", []) for clip in section.get("clips", [])]
+
+
 def is_quiz(tab: TabEntry) -> bool:
     """A tab whose clips have answers asks which are real and which are robots."""
-    return any("answer" in clip for clip in tab.get("clips", []))
+    return any("answer" in clip for clip in tab_clips(tab))
 
 
 def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
@@ -94,9 +106,17 @@ def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
         if tab["id"] in tab_ids:
             problems.append(f"{where_tab} has an id that's already used.")
         tab_ids.add(tab["id"])
+        # Groups and clips become ids on the same page, so they share one set.
         clip_ids: set[str] = set()
+        for section in tab.get("sections", []):
+            if section.get("label") and not section.get("id"):
+                problems.append(f"{where_tab}, group {section['label']!r} needs an id.")
+            elif section.get("id"):
+                if section["id"] in clip_ids:
+                    problems.append(f"{where_tab}, group {section['id']!r} has an id that's already used in this tab.")
+                clip_ids.add(section["id"])
         quiz = is_quiz(tab)
-        for n, clip in enumerate(tab.get("clips", []), start=1):
+        for n, clip in enumerate(tab_clips(tab), start=1):
             where = f"{where_tab}, clip {n} ({clip.get('id', '?')})"
             if quiz and clip.get("answer") not in ANSWERS:
                 problems.append(f"{where} needs an answer of real or robot, like the tab's other clips.")
@@ -205,7 +225,7 @@ def render_quiz(tab: TabEntry) -> str:
     """
     esc = html.escape
     questions = []
-    for clip in tab["clips"]:
+    for clip in tab_clips(tab):
         clip_id = esc(clip["id"])
         buttons = "".join(
             f'\n        <input type="radio" name="{clip_id}" id="{clip_id}-{answer}" value="{answer}"'
@@ -228,10 +248,33 @@ def render_quiz(tab: TabEntry) -> str:
         '  <form class="quiz" autocomplete="off">\n'
         f'  <ol class="clips questions">\n{items}\n  </ol>\n'
         f'  <div class="score"><p class="tally">Your score: </p><p class="total">'
-        f"out of {len(tab['clips'])} clips</p>"
+        f"out of {len(tab_clips(tab))} clips</p>"
         '<button type="reset">Start over</button></div>\n'
         "  </form>\n"
     )
+
+
+def render_sections(tab: TabEntry, level: int) -> str:
+    """Each group's heading, intro and clips, after a list of links to the groups when there's more than one.
+
+    level is the headings' level: 2 on the home page, which has no tab heading, and 3 under a tab's heading.
+    """
+    esc = html.escape
+    named = [section for section in tab["sections"] if section["label"]]
+    parts = []
+    if len(named) > 1:
+        links = "\n".join(f'    <a href="#{esc(s["id"])}">{esc(s["label"])}</a>' for s in named)
+        parts.append(f'  <nav class="groups" aria-label="Groups">\n{links}\n  </nav>\n')
+    for section in tab["sections"]:
+        if not section["clips"]:
+            continue
+        if section["label"]:
+            parts.append(f'  <h{level} id="{esc(section["id"])}">{esc(section["label"])}</h{level}>\n')
+        if section.get("intro"):
+            parts.append(f'  <div class="intro">\n{markdown(section["intro"])}\n  </div>\n')
+        items = "\n".join(render_clip(clip) for clip in section["clips"])
+        parts.append(f'  <ul class="clips">\n{items}\n  </ul>\n')
+    return "".join(parts)
 
 
 def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
@@ -248,9 +291,8 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
     intro = f'  <div class="intro">\n{markdown(tab["intro"])}\n  </div>\n' if tab.get("intro") else ""
     if is_quiz(tab):
         clips = render_quiz(tab)
-    elif tab["clips"]:
-        items = "\n".join(render_clip(clip) for clip in tab["clips"])
-        clips = f'  <ul class="clips">\n{items}\n  </ul>\n'
+    elif tab_clips(tab):
+        clips = render_sections(tab, level=2 if home else 3)
     else:
         clips = "" if home else '  <p class="empty">No clips yet.</p>\n'
     notice = QUIZ_NOTICE if is_quiz(tab) else NOTICE
@@ -286,7 +328,7 @@ def build(manifest: Manifest, root: Path = ROOT, site: Path = SITE) -> None:
     site.mkdir(parents=True)
     for tab in manifest["tabs"]:
         (site / page_name(manifest, tab)).write_text(render(manifest, tab, root), encoding="utf-8")
-        for clip in tab["clips"]:
+        for clip in tab_clips(tab):
             target = site / clip["file"]
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(root / clip["file"], target)
@@ -308,7 +350,7 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(1)
     if not args.check:
         build(manifest)
-        clips = sum(len(tab["clips"]) for tab in manifest["tabs"])
+        clips = sum(len(tab_clips(tab)) for tab in manifest["tabs"])
         print(f"Built {len(manifest['tabs'])} tabs with {clips} clips into {SITE.name}/")
 
 
