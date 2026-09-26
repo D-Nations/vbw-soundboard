@@ -4,6 +4,10 @@ clips.json holds the site's title and its tabs. Each tab has a label, an intro w
 Markdown, and its clips. The first tab becomes index.html and every other tab <id>.html, each page with the
 same tab bar and the same AI-generated notice, which isn't part of the editable text so it can't be dropped.
 
+A tab whose clips have answers ("real" or "robot") is a quiz. Its page asks which each clip is with a pair of
+radio buttons, and plain CSS reveals the answer and keeps a running score, so it still needs no JavaScript.
+Its notice says it mixes real recordings with AI-generated ones.
+
 Checks the manifest, then writes _site/ with the pages, the stylesheet and the clips. The GitHub Action runs
 this on every push and deploys _site/ to GitHub Pages.
 
@@ -17,7 +21,7 @@ import re
 import shutil
 import sys
 from pathlib import Path
-from typing import TypedDict, cast
+from typing import NotRequired, TypedDict, cast
 
 ROOT = Path(__file__).resolve().parent
 MANIFEST = ROOT / "clips.json"
@@ -30,14 +34,16 @@ CONTENT_SECURITY_POLICY = (
     "upgrade-insecure-requests"
 )
 TAB_ID = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+ANSWERS = ("real", "robot")
 
 
 class ClipEntry(TypedDict):
     id: str
     label: str
     voices: list[str]  # Voice names as shown, like DaveBot.
-    note: str  # Markdown, may be empty.
+    note: str  # Markdown, may be empty. On a quiz, shown once the clip is answered.
     file: str
+    answer: NotRequired[str]  # Only on a quiz tab's clips: real or robot.
 
 
 class TabEntry(TypedDict):
@@ -65,6 +71,11 @@ def page_name(manifest: Manifest, tab: TabEntry) -> str:
     return "index.html" if tab is manifest["tabs"][0] else f"{tab['id']}.html"
 
 
+def is_quiz(tab: TabEntry) -> bool:
+    """A tab whose clips have answers asks which are real and which are robots."""
+    return any("answer" in clip for clip in tab.get("clips", []))
+
+
 def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
     """Everything wrong with the manifest and its files. Empty when the site can be built."""
     problems = []
@@ -84,9 +95,13 @@ def check(manifest: Manifest, root: Path = ROOT) -> list[str]:
             problems.append(f"{where_tab} has an id that's already used.")
         tab_ids.add(tab["id"])
         clip_ids: set[str] = set()
+        quiz = is_quiz(tab)
         for n, clip in enumerate(tab.get("clips", []), start=1):
             where = f"{where_tab}, clip {n} ({clip.get('id', '?')})"
-            missing = [key for key in ("id", "label", "voices", "file") if not clip.get(key)]
+            if quiz and clip.get("answer") not in ANSWERS:
+                problems.append(f"{where} needs an answer of real or robot, like the tab's other clips.")
+            required = ("id", "label", "file") if quiz else ("id", "label", "voices", "file")
+            missing = [key for key in required if not clip.get(key)]
             if missing:
                 problems.append(f"{where} is missing {', '.join(missing)}.")
                 continue
@@ -152,6 +167,73 @@ def markdown(text: str) -> str:
 # ---------------------------------------------------------------- pages
 
 
+NOTICE = (
+    "<strong>Every voice here is AI-generated.</strong> These are synthetic imitations made with\n"
+    "  voice conversion models. None of these recordings were spoken by the people they sound like."
+)
+QUIZ_NOTICE = (
+    "<strong>This quiz mixes real recordings with AI-generated ones.</strong> Some clips are the hosts\n"
+    "  themselves, and some are imitations made with voice conversion models. Each answer says which."
+)
+
+
+def audio_tag(clip: ClipEntry) -> str:
+    file = Path(clip["file"])
+    return (
+        f'<audio controls preload="none"><source src="{html.escape(file.as_posix())}"'
+        f' type="{AUDIO_TYPES[file.suffix.lower()]}"></audio>'
+    )
+
+
+def render_clip(clip: ClipEntry) -> str:
+    esc = html.escape
+    return (
+        f'    <li id="{esc(clip["id"])}">\n'
+        f"      <p>{esc(clip['label'])}</p>\n"
+        f'      <p class="credit">{esc(" & ".join(clip["voices"]))}</p>\n'
+        + (f'      <div class="note">{markdown(clip["note"])}</div>\n' if clip.get("note") else "")
+        + f"      {audio_tag(clip)}\n"
+        "    </li>"
+    )
+
+
+def render_quiz(tab: TabEntry) -> str:
+    """Each clip with Real and Robot radio buttons, then a running score.
+
+    Each button is marked right or wrong. style.css shows the matching verdict and the clip's note once one is
+    picked, and counts the picked buttons with CSS counters for the score. Start over resets the form.
+    """
+    esc = html.escape
+    questions = []
+    for clip in tab["clips"]:
+        clip_id = esc(clip["id"])
+        buttons = "".join(
+            f'\n        <input type="radio" name="{clip_id}" id="{clip_id}-{answer}" value="{answer}"'
+            f' class="{"right" if answer == clip.get("answer") else "wrong"}">'
+            f'<label for="{clip_id}-{answer}">{answer.capitalize()}</label>'
+            for answer in ANSWERS
+        )
+        note = markdown(clip["note"]) if clip.get("note") else ""
+        questions.append(
+            f'    <li id="{clip_id}">\n'
+            f"      <p>{esc(clip['label'])}</p>\n"
+            f"      {audio_tag(clip)}\n"
+            f"      <fieldset>\n        <legend>Real or robot?</legend>{buttons}\n"
+            f'        <div class="verdict"><p class="if-right">Right!</p><p class="if-wrong">Wrong.</p>{note}</div>\n'
+            "      </fieldset>\n"
+            "    </li>"
+        )
+    items = "\n".join(questions)
+    return (
+        '  <form class="quiz" autocomplete="off">\n'
+        f'  <ol class="clips questions">\n{items}\n  </ol>\n'
+        f'  <div class="score"><p class="tally">Your score: </p><p class="total">'
+        f"out of {len(tab['clips'])} clips</p>"
+        '<button type="reset">Start over</button></div>\n'
+        "  </form>\n"
+    )
+
+
 def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
     """One tab's page: the title, the notice, the tab bar, the tab's intro and one native player per clip."""
     esc = html.escape
@@ -161,24 +243,17 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
         f"{esc(other['label'])}</a>"
         for other in manifest["tabs"]
     )
-    items = "\n".join(
-        f'    <li id="{esc(clip["id"])}">\n'
-        f"      <p>{esc(clip['label'])}</p>\n"
-        f'      <p class="credit">{esc(" & ".join(clip["voices"]))}</p>\n'
-        + (f'      <div class="note">{markdown(clip["note"])}</div>\n' if clip.get("note") else "")
-        + f'      <audio controls preload="none"><source src="{esc(Path(clip["file"]).as_posix())}"'
-        f' type="{AUDIO_TYPES[Path(clip["file"]).suffix.lower()]}"></audio>\n'
-        f"    </li>"
-        for clip in tab["clips"]
-    )
     home = tab is manifest["tabs"][0]
     heading = "" if home else f"  <h2>{esc(tab['label'])}</h2>\n"
     intro = f'  <div class="intro">\n{markdown(tab["intro"])}\n  </div>\n' if tab.get("intro") else ""
-    clips = (
-        f'  <ul class="clips">\n{items}\n  </ul>\n'
-        if tab["clips"]
-        else ("" if home else '  <p class="empty">No clips yet.</p>\n')
-    )
+    if is_quiz(tab):
+        clips = render_quiz(tab)
+    elif tab["clips"]:
+        items = "\n".join(render_clip(clip) for clip in tab["clips"])
+        clips = f'  <ul class="clips">\n{items}\n  </ul>\n'
+    else:
+        clips = "" if home else '  <p class="empty">No clips yet.</p>\n'
+    notice = QUIZ_NOTICE if is_quiz(tab) else NOTICE
     page_title = title if home else f"{esc(tab['label'])} · {title}"
     return f"""<!doctype html>
 <html lang="en">
@@ -193,8 +268,7 @@ def render(manifest: Manifest, tab: TabEntry, root: Path = ROOT) -> str:
 <body>
 <header>
   <h1><a href="index.html">{title}</a></h1>
-  <p class="notice"><strong>Every voice here is AI-generated.</strong> These are synthetic imitations made with
-  voice conversion models. None of these recordings were spoken by the people they sound like.</p>
+  <p class="notice">{notice}</p>
   <nav aria-label="Tabs">
 {nav}
   </nav>

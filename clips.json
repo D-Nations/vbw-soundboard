@@ -277,6 +277,813 @@
           "file": "clips/casablanca/moreso-b.mp3"
         }
       ]
+    },
+    {
+      "id": "real-or-robot",
+      "label": "Real or Robot?",
+      "intro": "Every clip here is from Very Bad Wizards. Half are real, and half are one host's voice converted to the other's by DaveBot or TamBot. Listen, then pick **Real** or **Robot**. Your score is at the bottom.",
+      "clips": [
+        {
+          "id": "clip-1",
+          "label": "Clip 1",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 279 - The Greenhouses We Burned Along the Way (Lee Chang-dong's Burning Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-1.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-2",
+          "label": "Clip 2",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-2.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-3",
+          "label": "Clip 3",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-3.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-4",
+          "label": "Clip 4",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-4.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-5",
+          "label": "Clip 5",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-5.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-6",
+          "label": "Clip 6",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-6.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-7",
+          "label": "Clip 7",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-7.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-8",
+          "label": "Clip 8",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-8.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-9",
+          "label": "Clip 9",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-9.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-10",
+          "label": "Clip 10",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-10.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-11",
+          "label": "Clip 11",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-11.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-12",
+          "label": "Clip 12",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-12.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-13",
+          "label": "Clip 13",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-13.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-14",
+          "label": "Clip 14",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-14.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-15",
+          "label": "Clip 15",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 322 - A Theater of Simultaneous Possibilities (William James' The Stream of Thought)*.",
+          "file": "clips/real-or-robot/clip-15.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-16",
+          "label": "Clip 16",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Bonus Episode - The Ambulators (A Deadwood Podcast)*.",
+          "file": "clips/real-or-robot/clip-16.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-17",
+          "label": "Clip 17",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Bonus Episode - The Ambulators (A Deadwood Podcast)*.",
+          "file": "clips/real-or-robot/clip-17.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-18",
+          "label": "Clip 18",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-18.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-19",
+          "label": "Clip 19",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 279 - The Greenhouses We Burned Along the Way (Lee Chang-dong's Burning Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-19.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-20",
+          "label": "Clip 20",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-20.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-21",
+          "label": "Clip 21",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-21.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-22",
+          "label": "Clip 22",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-22.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-23",
+          "label": "Clip 23",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 209 - Basic Instincts (with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-23.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-24",
+          "label": "Clip 24",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-24.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-25",
+          "label": "Clip 25",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-25.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-26",
+          "label": "Clip 26",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-26.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-27",
+          "label": "Clip 27",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-27.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-28",
+          "label": "Clip 28",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-28.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-29",
+          "label": "Clip 29",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Bonus Episode - The Ambulators (A Deadwood Podcast)*.",
+          "file": "clips/real-or-robot/clip-29.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-30",
+          "label": "Clip 30",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *The Lotus Eaters Episode 1 - The Journey Begins [unlocked]*.",
+          "file": "clips/real-or-robot/clip-30.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-31",
+          "label": "Clip 31",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 279 - The Greenhouses We Burned Along the Way (Lee Chang-dong's Burning Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-31.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-32",
+          "label": "Clip 32",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-32.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-33",
+          "label": "Clip 33",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 322 - A Theater of Simultaneous Possibilities (William James' The Stream of Thought)*.",
+          "file": "clips/real-or-robot/clip-33.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-34",
+          "label": "Clip 34",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-34.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-35",
+          "label": "Clip 35",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-35.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-36",
+          "label": "Clip 36",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-36.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-37",
+          "label": "Clip 37",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-37.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-38",
+          "label": "Clip 38",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-38.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-39",
+          "label": "Clip 39",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-39.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-40",
+          "label": "Clip 40",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *The Lotus Eaters Episode 1 - The Journey Begins [unlocked]*.",
+          "file": "clips/real-or-robot/clip-40.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-41",
+          "label": "Clip 41",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-41.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-42",
+          "label": "Clip 42",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-42.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-43",
+          "label": "Clip 43",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-43.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-44",
+          "label": "Clip 44",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-44.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-45",
+          "label": "Clip 45",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-45.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-46",
+          "label": "Clip 46",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-46.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-47",
+          "label": "Clip 47",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 209 - Basic Instincts (with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-47.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-48",
+          "label": "Clip 48",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-48.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-49",
+          "label": "Clip 49",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 322 - A Theater of Simultaneous Possibilities (William James' The Stream of Thought)*.",
+          "file": "clips/real-or-robot/clip-49.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-50",
+          "label": "Clip 50",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 279 - The Greenhouses We Burned Along the Way (Lee Chang-dong's Burning Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-50.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-51",
+          "label": "Clip 51",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-51.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-52",
+          "label": "Clip 52",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-52.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-53",
+          "label": "Clip 53",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Bonus Episode - The Ambulators (A Deadwood Podcast)*.",
+          "file": "clips/real-or-robot/clip-53.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-54",
+          "label": "Clip 54",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-54.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-55",
+          "label": "Clip 55",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-55.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-56",
+          "label": "Clip 56",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-56.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-57",
+          "label": "Clip 57",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *The Lotus Eaters Episode 1 - The Journey Begins [unlocked]*.",
+          "file": "clips/real-or-robot/clip-57.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-58",
+          "label": "Clip 58",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *The Lotus Eaters Episode 1 - The Journey Begins [unlocked]*.",
+          "file": "clips/real-or-robot/clip-58.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-59",
+          "label": "Clip 59",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-59.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-60",
+          "label": "Clip 60",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-60.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-61",
+          "label": "Clip 61",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-61.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-62",
+          "label": "Clip 62",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 332 - Talking to Myself (The Other by Jorge Luis Borges)*.",
+          "file": "clips/real-or-robot/clip-62.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-63",
+          "label": "Clip 63",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-63.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-64",
+          "label": "Clip 64",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-64.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-65",
+          "label": "Clip 65",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-65.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-66",
+          "label": "Clip 66",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-66.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-67",
+          "label": "Clip 67",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-67.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-68",
+          "label": "Clip 68",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Bonus Episode - The Ambulators (A Deadwood Podcast)*.",
+          "file": "clips/real-or-robot/clip-68.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-69",
+          "label": "Clip 69",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-69.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-70",
+          "label": "Clip 70",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 209 - Basic Instincts (with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-70.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-71",
+          "label": "Clip 71",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-71.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-72",
+          "label": "Clip 72",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 259 - Losing Time (Tár with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-72.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-73",
+          "label": "Clip 73",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-73.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-74",
+          "label": "Clip 74",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-74.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-75",
+          "label": "Clip 75",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-75.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-76",
+          "label": "Clip 76",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-76.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-77",
+          "label": "Clip 77",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 302 - Metaphysical Edging*.",
+          "file": "clips/real-or-robot/clip-77.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-78",
+          "label": "Clip 78",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-78.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-79",
+          "label": "Clip 79",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-79.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-80",
+          "label": "Clip 80",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 209 - Basic Instincts (with Paul Bloom)*.",
+          "file": "clips/real-or-robot/clip-80.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-81",
+          "label": "Clip 81",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-81.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-82",
+          "label": "Clip 82",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 249 - Phlegm and Carelessness (Hume's The Sceptic)*.",
+          "file": "clips/real-or-robot/clip-82.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-83",
+          "label": "Clip 83",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-83.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-84",
+          "label": "Clip 84",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *The Lotus Eaters Episode 1 - The Journey Begins [unlocked]*.",
+          "file": "clips/real-or-robot/clip-84.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-85",
+          "label": "Clip 85",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-85.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-86",
+          "label": "Clip 86",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-86.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-87",
+          "label": "Clip 87",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-87.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-88",
+          "label": "Clip 88",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-88.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-89",
+          "label": "Clip 89",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-89.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-90",
+          "label": "Clip 90",
+          "voices": [],
+          "note": "**Robot:** TamBot, converting Dave Pizarro from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-90.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-91",
+          "label": "Clip 91",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 239 - Lose Yourself*.",
+          "file": "clips/real-or-robot/clip-91.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-92",
+          "label": "Clip 92",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-92.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-93",
+          "label": "Clip 93",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 126 - The Absurd*.",
+          "file": "clips/real-or-robot/clip-93.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-94",
+          "label": "Clip 94",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-94.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-95",
+          "label": "Clip 95",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 289 - Shadows on the Wall (Plato's Cave Pt. 1)*.",
+          "file": "clips/real-or-robot/clip-95.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-96",
+          "label": "Clip 96",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 322 - A Theater of Simultaneous Possibilities (William James' The Stream of Thought)*.",
+          "file": "clips/real-or-robot/clip-96.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-97",
+          "label": "Clip 97",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 312 - MechaSkeptic*.",
+          "file": "clips/real-or-robot/clip-97.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-98",
+          "label": "Clip 98",
+          "voices": [],
+          "note": "**Real:** Tamler Sommers, from *Episode 219 - Multiplied by Mirrors*.",
+          "file": "clips/real-or-robot/clip-98.mp3",
+          "answer": "real"
+        },
+        {
+          "id": "clip-99",
+          "label": "Clip 99",
+          "voices": [],
+          "note": "**Robot:** DaveBot, converting Tamler Sommers from *Episode 229 - Skin Deep*.",
+          "file": "clips/real-or-robot/clip-99.mp3",
+          "answer": "robot"
+        },
+        {
+          "id": "clip-100",
+          "label": "Clip 100",
+          "voices": [],
+          "note": "**Real:** Dave Pizarro, from *Episode 269 - Death Hilarious (Blood Meridian, Pt. 2)*.",
+          "file": "clips/real-or-robot/clip-100.mp3",
+          "answer": "real"
+        }
+      ]
     }
   ]
 }

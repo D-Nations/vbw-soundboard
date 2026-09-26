@@ -111,6 +111,33 @@ class BuildTest(unittest.TestCase):
         self.assertIn("&lt;b&gt;x&lt;/b&gt;", out)
         self.assertIn("<ul><li>one</li><li><strong>two</strong></li></ul>", out)
 
+    def test_a_quiz_tab_asks_real_or_robot_and_marks_the_right_answer(self) -> None:
+        board = manifest(
+            tab("home"),
+            tab("quiz", clip("q1", voices=[], answer="robot", note="**Robot:** TamBot."), clip("q2", answer="real")),
+        )
+
+        page = render(board, board["tabs"][1], self.root)
+
+        self.assertEqual(check(board, self.root), [])
+        self.assertIn('id="q1-real" value="real" class="wrong"', page)
+        self.assertIn('id="q1-robot" value="robot" class="right"', page)
+        self.assertIn('id="q2-real" value="real" class="right"', page)
+        self.assertIn("<strong>Robot:</strong> TamBot.", page)
+        self.assertIn('<button type="reset">', page)
+        self.assertIn("out of 2 clips", page)
+        self.assertIn("mixes real recordings", page)
+        self.assertNotIn('class="credit"', page)
+        self.assertNotIn("<script", page)
+
+    def test_every_clip_in_a_quiz_needs_an_answer(self) -> None:
+        bad = manifest(tab("home"), tab("quiz", clip("q1", answer="robot"), clip("q2"), clip("q3", answer="fake")))
+
+        problems = check(bad, self.root)
+
+        self.assertEqual(len(problems), 2)
+        self.assertTrue(all("real or robot" in problem for problem in problems))
+
     def test_an_empty_tab_says_so(self) -> None:
         board = manifest(tab("home"), tab("empty"))
 
